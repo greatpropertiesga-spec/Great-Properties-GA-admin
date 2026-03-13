@@ -8,194 +8,86 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --brand: #c0392b;
-  --brand-rgb: 192,57,43;
-  --brand-dim: rgba(192,57,43,.12);
-  --brand-glow: rgba(192,57,43,.25);
-  --bg: #080808;
-  --surface: #0f0f0f;
-  --card: #141414;
-  --raised: #1a1a1a;
-  --lift: #202020;
-  --border: rgba(255,255,255,.06);
-  --border-strong: rgba(255,255,255,.11);
-  --text: #ececec;
-  --text-dim: #999;
-  --text-faint: #555;
-  --green: #10b981;
-  --amber: #f59e0b;
-  --blue: #3b82f6;
-  --red: #ef4444;
-  --sw: 228px;
-  --topbar-h: 54px;
-  --radius: 10px;
+  --brand:#c0392b;--brand-rgb:192,57,43;--brand-dim:rgba(192,57,43,.12);--brand-glow:rgba(192,57,43,.25);
+  --bg:#080808;--surface:#0f0f0f;--card:#141414;--raised:#1a1a1a;--lift:#202020;
+  --border:rgba(255,255,255,.06);--border-strong:rgba(255,255,255,.11);
+  --text:#ececec;--text-dim:#999;--text-faint:#555;
+  --green:#10b981;--amber:#f59e0b;--blue:#3b82f6;--red:#ef4444;
+  --sw:232px;--topbar-h:54px;--radius:10px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;-webkit-font-smoothing:antialiased;line-height:1.5}
-/* ── LAYOUT ── */
 .shell{display:flex;height:100vh}
-/* ── SIDEBAR ── */
-.sidebar{
-  width:var(--sw);flex-shrink:0;
-  background:var(--surface);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  position:relative;
-}
-.sidebar::after{
-  content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;
-  background:linear-gradient(to bottom,transparent,var(--brand-glow),transparent);
-}
-/* Logo area */
-.s-logo{
-  padding:22px 18px 18px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:11px;
-}
-.s-logo-mark{
-  width:36px;height:36px;border-radius:9px;
-  background:linear-gradient(135deg,var(--brand),#8b1a12);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
-  box-shadow:0 4px 12px rgba(var(--brand-rgb),.35);
-}
+/* SIDEBAR */
+.sidebar{width:var(--sw);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:relative}
+.sidebar::after{content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;background:linear-gradient(to bottom,transparent,var(--brand-glow),transparent)}
+.s-logo{padding:22px 18px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
+.s-logo-mark{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--brand),#8b1a12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 12px rgba(var(--brand-rgb),.35)}
 .s-logo-text{line-height:1.25}
 .s-logo-name{font-size:11.5px;font-weight:700;color:var(--text);letter-spacing:.1px}
 .s-logo-sub{font-size:9.5px;color:var(--text-dim);margin-top:1px;font-weight:500}
-/* Nav */
-.s-nav{flex:1;overflow-y:auto;padding:10px 10px}
-.s-section{
-  font-size:9px;font-weight:700;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--text-faint);
-  padding:14px 8px 5px;
-}
-.s-item{
-  display:flex;align-items:center;gap:9px;
-  padding:9px 10px;border-radius:8px;cursor:pointer;
-  font-size:12.5px;font-weight:500;color:var(--text-dim);
-  transition:all .15s;position:relative;
-  margin-bottom:2px;user-select:none;
-}
+.s-nav{flex:1;overflow-y:auto;padding:10px}
+.s-section{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-faint);padding:14px 8px 5px}
+.s-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--text-dim);transition:all .15s;position:relative;margin-bottom:2px;user-select:none}
 .s-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
 .s-item.on{background:var(--brand-dim);color:var(--text)}
-.s-item.on::before{
-  content:'';position:absolute;left:0;top:20%;height:60%;
-  width:2.5px;background:var(--brand);border-radius:0 3px 3px 0;
-}
+.s-item.on::before{content:'';position:absolute;left:0;top:20%;height:60%;width:2.5px;background:var(--brand);border-radius:0 3px 3px 0}
 .s-icon{width:16px;text-align:center;font-size:14px;line-height:1;opacity:.75}
-.s-badge{
-  margin-left:auto;height:18px;min-width:18px;
-  background:var(--brand);color:#fff;
-  font-size:9px;font-weight:700;border-radius:50px;
-  display:flex;align-items:center;justify-content:center;
-  padding:0 5px;letter-spacing:.2px;
-}
+.s-badge{margin-left:auto;height:18px;min-width:18px;background:var(--brand);color:#fff;font-size:9px;font-weight:700;border-radius:50px;display:flex;align-items:center;justify-content:center;padding:0 5px;letter-spacing:.2px}
 .s-badge.b{background:var(--blue)}
-/* Footer */
-.s-foot{
-  padding:12px 14px;border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
+.s-foot{padding:12px 14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .conn{display:flex;align-items:center;gap:7px}
 .conn-dot{width:7px;height:7px;border-radius:50%;background:var(--text-faint);flex-shrink:0;transition:all .3s}
 .conn-dot.ok{background:var(--green);box-shadow:0 0 8px var(--green)}
 .conn-dot.err{background:var(--red)}
 .conn-label{font-size:10.5px;color:var(--text-dim);font-weight:500}
-/* ── TOPBAR ── */
-.topbar{
-  height:var(--topbar-h);flex-shrink:0;
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  padding:0 24px;gap:14px;
-}
-.tb-title{
-  font-family:'Playfair Display',serif;
-  font-size:17px;font-weight:700;color:var(--text);
-  flex:1;letter-spacing:-.2px;
-}
+/* TOPBAR */
+.topbar{height:var(--topbar-h);flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px}
+.tb-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);flex:1;letter-spacing:-.2px}
 .tb-right{display:flex;align-items:center;gap:8px}
-/* ── MAIN ── */
+/* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .content{flex:1;overflow-y:auto;padding:26px 28px}
-/* Views */
 .view{display:none}.view.on{display:block}
-/* ── PAGE HEADER ── */
+/* PAGE HEADER */
 .ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
 .ph-l h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:-.3px;color:var(--text)}
 .ph-l p{font-size:11.5px;color:var(--text-dim);margin-top:3px}
 .ph-r{display:flex;gap:8px;flex-shrink:0;align-items:center}
-/* ── STAT CARDS ── */
+/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
-.stat{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius);padding:17px 18px;
-  position:relative;overflow:hidden;
-  transition:border-color .2s;
-}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:17px 18px;position:relative;overflow:hidden;transition:border-color .2s}
 .stat:hover{border-color:var(--border-strong)}
 .stat-stripe{position:absolute;top:0;left:0;right:0;height:2.5px;border-radius:var(--radius) var(--radius) 0 0}
 .stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-dim)}
-.stat-val{
-  font-family:'DM Mono',monospace;
-  font-size:30px;font-weight:500;color:var(--text);
-  margin:7px 0 3px;line-height:1;
-}
+.stat-val{font-family:'DM Mono',monospace;font-size:30px;font-weight:500;color:var(--text);margin:7px 0 3px;line-height:1}
 .stat-note{font-size:11px;color:var(--text-faint)}
-/* ── CARD ── */
-.card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;margin-bottom:16px;
-}
-.card-head{
-  padding:13px 18px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;
-}
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.card-head{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .card-head h3{font-size:12.5px;font-weight:600;color:var(--text);letter-spacing:.1px}
 .card-body{padding:18px}
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:7px 15px;border-radius:8px;border:none;
-  font-size:12px;font-weight:600;cursor:pointer;
-  font-family:'DM Sans',sans-serif;transition:all .14s;
-  text-decoration:none;white-space:nowrap;letter-spacing:.1px;
-}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .14s;text-decoration:none;white-space:nowrap;letter-spacing:.1px}
 .btn-primary{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(var(--brand-rgb),.3)}
-.btn-primary:hover{background:#a93225;box-shadow:0 4px 14px rgba(var(--brand-rgb),.4);transform:translateY(-1px)}
+.btn-primary:hover{background:#a93225;transform:translateY(-1px)}
 .btn-ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border)}
 .btn-ghost:hover{background:rgba(255,255,255,.09);border-color:var(--border-strong)}
 .btn-danger{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.18)}
 .btn-danger:hover{background:rgba(239,68,68,.18)}
 .btn-sm{padding:5px 11px;font-size:11.5px;border-radius:6px}
 .btn-icon{padding:5px 8px}
-/* ── TABLE ── */
+/* TABLE */
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse}
-thead th{
-  text-align:left;font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:1.5px;color:var(--text-faint);
-  padding:10px 16px;border-bottom:1px solid var(--border);
-  background:rgba(0,0,0,.2);white-space:nowrap;
-}
-td{
-  padding:11px 16px;
-  border-bottom:1px solid rgba(255,255,255,.03);
-  font-size:12.5px;vertical-align:middle;
-}
+thead th{text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-faint);padding:10px 16px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.2);white-space:nowrap}
+td{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.03);font-size:12.5px;vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(255,255,255,.018)}
 .tda{display:flex;gap:5px;align-items:center}
-/* ── BADGE ── */
-.badge{
-  display:inline-flex;align-items:center;
-  padding:3px 8px;border-radius:50px;
-  font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.5px;
-}
+/* BADGE */
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:50px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .b-available{background:rgba(16,185,129,.1);color:#34d399;border:1px solid rgba(16,185,129,.2)}
 .b-sold{background:rgba(120,120,120,.1);color:#888;border:1px solid rgba(120,120,120,.15)}
 .b-pending{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
@@ -204,138 +96,58 @@ tr:hover td{background:rgba(255,255,255,.018)}
 .b-qualified{background:rgba(16,185,129,.1);color:#34d399;border:1px solid rgba(16,185,129,.2)}
 .b-closed{background:rgba(120,120,120,.1);color:#888;border:1px solid rgba(120,120,120,.15)}
 .b-dead{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.15)}
-/* ── OVERLAY / MODAL ── */
-.overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
-  z-index:200;align-items:center;justify-content:center;
-  padding:20px;
-}
+/* OVERLAY / MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
-.modal{
-  background:var(--card);
-  border:1px solid var(--border-strong);
-  border-radius:14px;width:100%;max-width:700px;
-  max-height:90vh;overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:0 40px 100px rgba(0,0,0,.8);
-}
-.modal-head{
-  padding:18px 22px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;
-}
+.modal{background:var(--card);border:1px solid var(--border-strong);border-radius:14px;width:100%;max-width:700px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 100px rgba(0,0,0,.8)}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .modal-head h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text)}
-.modal-x{
-  background:rgba(255,255,255,.06);border:none;
-  color:var(--text-dim);cursor:pointer;
-  width:28px;height:28px;border-radius:7px;
-  font-size:14px;display:flex;align-items:center;justify-content:center;
-  transition:all .14s;
-}
+.modal-x{background:rgba(255,255,255,.06);border:none;color:var(--text-dim);cursor:pointer;width:28px;height:28px;border-radius:7px;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .14s}
 .modal-x:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .modal-body{padding:22px;overflow-y:auto;flex:1}
-/* ── FORM ── */
+/* FORM */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
 .fg label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim)}
-.fg input,.fg select,.fg textarea{
-  background:var(--raised);border:1px solid var(--border);
-  border-radius:8px;padding:9px 12px;
-  color:var(--text);font-size:13px;
-  font-family:'DM Sans',sans-serif;
-  transition:border-color .15s,background .15s;width:100%;
-}
-.fg input:focus,.fg select:focus,.fg textarea:focus{
-  outline:none;border-color:var(--brand);
-  background:rgba(255,255,255,.03);
-}
+.fg input,.fg select,.fg textarea{background:var(--raised);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;transition:border-color .15s,background .15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--brand);background:rgba(255,255,255,.03)}
 .fg select option{background:#1a1a1a}
 .fg textarea{resize:vertical;min-height:80px;line-height:1.5}
 .fg small{font-size:10.5px;color:var(--text-faint);line-height:1.4}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
 .fgrid .fg.full{grid-column:1/-1}
-.f-section{
-  grid-column:1/-1;
-  font-size:9.5px;font-weight:700;
-  text-transform:uppercase;letter-spacing:2px;color:var(--brand);
-  padding:12px 0 8px;
-  border-bottom:1px solid rgba(var(--brand-rgb),.2);
-  margin-bottom:4px;
-}
-.f-actions{
-  display:flex;gap:8px;justify-content:flex-end;
-  padding-top:14px;border-top:1px solid var(--border);
-  margin-top:6px;grid-column:1/-1;
-}
-/* ── SETTINGS TABS ── */
-.stabs{
-  display:flex;gap:2px;margin-bottom:16px;
-  background:var(--raised);padding:4px;
-  border-radius:10px;width:fit-content;
-}
-.stab{
-  padding:7px 14px;border-radius:7px;cursor:pointer;
-  font-size:11.5px;font-weight:600;color:var(--text-dim);
-  transition:all .14s;user-select:none;
-}
+.f-section{grid-column:1/-1;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--brand);padding:12px 0 8px;border-bottom:1px solid rgba(var(--brand-rgb),.2);margin-bottom:4px}
+.f-actions{display:flex;gap:8px;justify-content:flex-end;padding-top:14px;border-top:1px solid var(--border);margin-top:6px;grid-column:1/-1}
+/* SETTINGS TABS */
+.stabs{display:flex;gap:2px;margin-bottom:16px;background:var(--raised);padding:4px;border-radius:10px;width:fit-content;flex-wrap:wrap}
+.stab{padding:7px 14px;border-radius:7px;cursor:pointer;font-size:11.5px;font-weight:600;color:var(--text-dim);transition:all .14s;user-select:none}
 .stab:hover{color:var(--text)}
 .stab.on{background:var(--card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.4)}
 .spanel{display:none}.spanel.on{display:block}
 /* Setting rows */
-.srow{
-  display:grid;grid-template-columns:175px 1fr 82px;
-  align-items:center;gap:14px;
-  padding:13px 0;border-bottom:1px solid var(--border);
-}
+.srow{display:grid;grid-template-columns:190px 1fr 90px;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
 .srow:last-child{border-bottom:none}
 .sr-name{font-size:12.5px;font-weight:600;color:var(--text)}
 .sr-key{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-faint);margin-top:2px}
 /* Color widget */
 .cfield{display:flex;gap:8px;align-items:center}
-.cswatch{
-  width:34px;height:34px;border-radius:7px;
-  border:1px solid var(--border-strong);cursor:pointer;
-  padding:3px;flex-shrink:0;background:none;
-}
-/* ── COLOR PREVIEW PANEL ── */
-.cprev{
-  background:var(--raised);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px;
-  margin-top:14px;
-}
-.cprev-title{
-  font-size:9.5px;font-weight:700;text-transform:uppercase;
-  letter-spacing:2px;color:var(--text-faint);
-  margin-bottom:14px;display:flex;align-items:center;gap:7px;
-}
+.cswatch{width:34px;height:34px;border-radius:7px;border:1px solid var(--border-strong);cursor:pointer;padding:3px;flex-shrink:0;background:none}
+/* Font select */
+.font-select{width:100%;background:var(--raised);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif}
+.font-select:focus{outline:none;border-color:var(--brand)}
+.font-select option{background:#1a1a1a}
+/* Preview panel */
+.cprev{background:var(--raised);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:14px}
+.cprev-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-faint);margin-bottom:14px;display:flex;align-items:center;gap:7px}
 .cprev-title::after{content:'';flex:1;height:1px;background:var(--border)}
-/* Mini site preview */
-.msite{
-  border-radius:8px;overflow:hidden;
-  border:1px solid var(--border-strong);
-  font-family:'Inter',sans-serif;
-  box-shadow:0 8px 30px rgba(0,0,0,.4);
-}
-.ms-topbar{
-  padding:5px 10px;background:#1c1c1c;
-  font-size:8.5px;color:#888;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.ms-header{
-  background:#fff;padding:9px 12px;
-  display:flex;align-items:center;gap:9px;
-  border-bottom:3px solid #ddd;
-}
+.msite{border-radius:8px;overflow:hidden;border:1px solid var(--border-strong);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.ms-topbar{padding:5px 10px;background:#1c1c1c;font-size:8.5px;color:#888;display:flex;justify-content:space-between;align-items:center}
+.ms-header{background:#fff;padding:9px 12px;display:flex;align-items:center;gap:9px;border-bottom:3px solid #ddd}
 .ms-logo-icon{font-size:22px;line-height:1}
 .ms-logo-name{font-size:10px;font-weight:700;color:#111;line-height:1.2}
 .ms-logo-tag{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:1px}
 .ms-nav{display:flex;border:none}
 .ms-nav span{padding:7px 10px;color:#fff;font-size:8.5px;font-weight:600;letter-spacing:.3px}
-.ms-hero{
-  padding:18px 14px;background:#111;
-  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
-}
+.ms-hero{padding:18px 14px;background:#111;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .ms-hero-copy h4{color:#f0f0f0;font-size:10px;font-weight:700;line-height:1.35;margin-bottom:4px}
 .ms-hero-copy p{color:#777;font-size:8px;margin-bottom:8px}
 .ms-cta{padding:4px 9px;border-radius:4px;color:#fff;font-size:8px;font-weight:700;display:inline-block}
@@ -345,9 +157,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
 .ms-submit{height:19px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:7.5px;font-weight:700;margin-top:4px}
 .ms-footer{background:#1a1a1a;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
 .ms-footer-txt{font-size:8px;color:#555}
-.ms-footer-links{display:flex;gap:8px}
-.ms-footer-links span{font-size:8px;color:#666}
-/* ── MEDIA ── */
+/* MEDIA */
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
 .mitem{background:var(--raised);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .15s}
 .mitem:hover{border-color:var(--border-strong)}
@@ -356,53 +166,34 @@ tr:hover td{background:rgba(255,255,255,.018)}
 .minfo{padding:8px}
 .mname{font-size:10.5px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:5px}
 .mact{display:flex;gap:4px}
-/* Upload zone */
-.uzone{
-  border:2px dashed var(--border-strong);border-radius:10px;
-  padding:28px;text-align:center;cursor:pointer;
-  transition:all .2s;position:relative;margin-bottom:14px;
-}
+.uzone{border:2px dashed var(--border-strong);border-radius:10px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;position:relative;margin-bottom:14px}
 .uzone:hover,.uzone.drag{border-color:var(--brand);background:var(--brand-dim)}
 .uzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-/* ── EMPTY STATE ── */
+/* EMPTY */
 .empty{text-align:center;padding:44px 20px}
 .empty-icon{font-size:34px;opacity:.2;display:block;margin-bottom:10px;line-height:1}
 .empty h4{font-size:13px;font-weight:600;color:var(--text-dim);margin-bottom:4px}
 .empty p{font-size:11.5px;color:var(--text-faint)}
-/* ── LOADING ── */
+/* LOADING */
 .loading{text-align:center;padding:30px;color:var(--text-faint);font-size:12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spin{
-  display:inline-block;width:15px;height:15px;
-  border:2px solid var(--border);border-top-color:var(--brand);
-  border-radius:50%;animation:spin .65s linear infinite;
-  vertical-align:middle;margin-right:6px;
-}
-/* ── TOAST ── */
+.spin{display:inline-block;width:15px;height:15px;border:2px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .65s linear infinite;vertical-align:middle;margin-right:6px}
+/* TOAST */
 .toasts{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.toast{
-  background:var(--card);border:1px solid var(--border-strong);
-  border-radius:9px;padding:10px 16px;
-  font-size:12.5px;font-weight:500;
-  min-width:240px;max-width:320px;
-  box-shadow:0 12px 40px rgba(0,0,0,.6);
-  transform:translateX(calc(100% + 24px));transition:transform .28s cubic-bezier(.22,.68,0,1.2);
-  display:flex;align-items:center;gap:9px;pointer-events:all;
-}
+.toast{background:var(--card);border:1px solid var(--border-strong);border-radius:9px;padding:10px 16px;font-size:12.5px;font-weight:500;min-width:240px;max-width:320px;box-shadow:0 12px 40px rgba(0,0,0,.6);transform:translateX(calc(100% + 24px));transition:transform .28s cubic-bezier(.22,.68,0,1.2);display:flex;align-items:center;gap:9px;pointer-events:all}
 .toast.show{transform:translateX(0)}
 .toast.ok{border-left:3px solid var(--green)}
 .toast.err{border-left:3px solid var(--red)}
 .toast.inf{border-left:3px solid var(--blue)}
-/* ── LEAD DETAIL ── */
+/* LEAD DETAIL */
 .lgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .lfield label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-faint);display:block;margin-bottom:3px}
 .lfield span{font-size:13px;color:var(--text)}
-/* ── SCROLLBAR ── */
+/* SCROLLBAR */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.14)}
-/* ── RESPONSIVE ── */
 @media(max-width:860px){
   .sidebar{width:54px}
   .s-logo-text,.s-section,.s-item span,.s-badge,.s-foot .conn-label{display:none}
@@ -417,7 +208,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
 <body>
 <div class="shell">
 
-<!-- ══════════ SIDEBAR ══════════ -->
+<!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="s-logo">
     <div class="s-logo-mark">🦅</div>
@@ -433,7 +224,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <div class="s-item" data-view="properties"><span class="s-icon">🏠</span><span>Properties</span><span class="s-badge" id="nc-p">0</span></div>
     <div class="s-item" data-view="leads"><span class="s-icon">📋</span><span>Leads</span><span class="s-badge b" id="nc-l">0</span></div>
     <div class="s-item" data-view="media"><span class="s-icon">🖼</span><span>Media</span></div>
-    <div class="s-section">Config</div>
+    <div class="s-section">Diseño</div>
     <div class="s-item" data-view="settings"><span class="s-icon">⚙</span><span>Site Settings</span></div>
   </div>
   <div class="s-foot">
@@ -441,11 +232,11 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="conn-dot" id="cdot"></div>
       <span class="conn-label" id="ctxt">Conectando…</span>
     </div>
-    <a href="https://greatpropertiesga-greatpropertiesga.zewfmr.easypanel.host" target="_blank" class="btn btn-ghost btn-sm btn-icon" title="Ver sitio web">↗</a>
+    <a href="https://greatpropertiesga-greatpropertiesga.zewfmr.easypanel.host" target="_blank" class="btn btn-ghost btn-sm btn-icon" title="Ver sitio">↗</a>
   </div>
 </nav>
 
-<!-- ══════════ MAIN ══════════ -->
+<!-- MAIN -->
 <div class="main">
   <div class="topbar">
     <div class="tb-title" id="ptitle">Dashboard</div>
@@ -508,17 +299,21 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <!-- SETTINGS -->
     <div class="view" id="view-settings">
       <div class="ph">
-        <div class="ph-l"><h2>Site Settings</h2><p>Configuración del sitio en tiempo real — los cambios se reflejan instantáneamente</p></div>
-        <div class="ph-r"><button class="btn btn-primary" onclick="saveAll()">💾 Guardar Todo</button></div>
+        <div class="ph-l"><h2>Site Settings</h2><p>Todos los cambios se guardan en Supabase y se reflejan al instante en el sitio</p></div>
+        <div class="ph-r">
+          <button class="btn btn-ghost btn-sm" onclick="clearSiteCache()" title="Forzar recarga del sitio">🔄 Limpiar Cache</button>
+          <button class="btn btn-primary" onclick="saveAll()">💾 Guardar Todo</button>
+        </div>
       </div>
       <div class="stabs">
-        <div class="stab on" onclick="switchTab(this,'st-contact')">📞 Contacto</div>
-        <div class="stab" onclick="switchTab(this,'st-branding')">🎨 Branding</div>
-        <div class="stab" onclick="switchTab(this,'st-homepage')">🏠 Homepage</div>
-        <div class="stab" onclick="switchTab(this,'st-about')">ℹ About</div>
-        <div class="stab" onclick="switchTab(this,'st-sell')">💰 Sell Page</div>
-        <div class="stab" onclick="switchTab(this,'st-footer')">🔗 Footer</div>
-        <div class="stab" onclick="switchTab(this,'st-seo')">🔍 SEO</div>
+        <div class="stab on"  onclick="switchTab(this,'st-contact')">📞 Contacto</div>
+        <div class="stab"     onclick="switchTab(this,'st-branding')">🎨 Branding</div>
+        <div class="stab"     onclick="switchTab(this,'st-colors')">🖌 Colores & Fondo</div>
+        <div class="stab"     onclick="switchTab(this,'st-fonts')">🔤 Tipografía</div>
+        <div class="stab"     onclick="switchTab(this,'st-homepage')">🏠 Homepage</div>
+        <div class="stab"     onclick="switchTab(this,'st-about')">ℹ About</div>
+        <div class="stab"     onclick="switchTab(this,'st-footer')">🔗 Footer</div>
+        <div class="stab"     onclick="switchTab(this,'st-seo')">🔍 SEO</div>
       </div>
       <div id="sbody"><div class="loading"><span class="spin"></span>Cargando…</div></div>
     </div>
@@ -526,7 +321,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <!-- MEDIA -->
     <div class="view" id="view-media">
       <div class="ph">
-        <div class="ph-l"><h2>Media</h2><p>Imágenes y videos para el sitio</p></div>
+        <div class="ph-l"><h2>Media</h2><p>Imágenes y archivos del sitio</p></div>
         <div class="ph-r"><button class="btn btn-ghost btn-sm" onclick="loadMedia()">🔄 Recargar</button></div>
       </div>
       <div class="card">
@@ -542,16 +337,16 @@ tr:hover td{background:rgba(255,255,255,.018)}
         </div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>Archivos en el Bucket <code style="font-size:10px;background:var(--raised);padding:2px 6px;border-radius:4px;color:var(--text-dim)">gpga-media</code></h3></div>
+        <div class="card-head"><h3>Archivos <code style="font-size:10px;background:var(--raised);padding:2px 6px;border-radius:4px;color:var(--text-dim)">gpga-media</code></h3></div>
         <div class="card-body" id="mbody"><div class="loading"><span class="spin"></span>Cargando…</div></div>
       </div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /main -->
-</div><!-- /shell -->
+  </div>
+</div>
+</div>
 
-<!-- ══════════ MODAL: PROPERTY ══════════ -->
+<!-- MODAL: PROPERTY -->
 <div class="overlay" id="ov-p">
   <div class="modal">
     <div class="modal-head">
@@ -567,14 +362,14 @@ tr:hover td{background:rgba(255,255,255,.018)}
           <div class="fg full"><label>Dirección completa</label><input id="p-addr" placeholder="1234 Peachtree Rd NE"></div>
           <div class="fg"><label>Ciudad</label><input id="p-city" placeholder="Atlanta"></div>
           <div class="fg"><label>Zip Code</label><input id="p-zip" placeholder="30309"></div>
-          <div class="fg"><label>Precio Listing ($)</label><input id="p-price" type="number" placeholder="249000"></div>
+          <div class="fg"><label>Precio ($)</label><input id="p-price" type="number" placeholder="249000"></div>
           <div class="fg"><label>Estado</label>
             <select id="p-status">
               <option value="available">✅ Available</option>
               <option value="pending">⏳ Pending</option>
               <option value="sold">🏷 Sold</option>
             </select></div>
-          <div class="fg"><label>Tipo de Propiedad</label>
+          <div class="fg"><label>Tipo</label>
             <select id="p-type">
               <option value="single-family">Single-Family Home</option>
               <option value="condo">Condo / Townhome</option>
@@ -585,20 +380,18 @@ tr:hover td{background:rgba(255,255,255,.018)}
             </select></div>
           <div class="fg"><label>¿Destacar en homepage?</label>
             <select id="p-feat"><option value="false">No</option><option value="true">⭐ Sí — Featured</option></select></div>
-
           <div class="f-section">Detalles Físicos</div>
           <div class="fg"><label>Habitaciones</label><input id="p-bed" type="number" placeholder="3" min="0"></div>
           <div class="fg"><label>Baños</label><input id="p-bath" type="number" step="0.5" placeholder="2" min="0"></div>
           <div class="fg"><label>Área (sqft)</label><input id="p-sqft" type="number" placeholder="1650"></div>
           <div class="fg"><label>Lot Size</label><input id="p-lot" placeholder="0.25 acres"></div>
-          <div class="fg full"><label>Descripción</label><textarea id="p-desc" rows="3" placeholder="Fully renovated 3/2 home in prime Atlanta location…"></textarea></div>
-          <div class="fg full"><label>Features (separar con comas)</label><input id="p-features" placeholder="New roof, Updated kitchen, Hardwood floors, 2-car garage"></div>
-
+          <div class="fg full"><label>Descripción</label><textarea id="p-desc" rows="3"></textarea></div>
+          <div class="fg full"><label>Features (separar con comas)</label><input id="p-features" placeholder="New roof, Updated kitchen, Hardwood floors"></div>
           <div class="f-section">Imágenes</div>
           <div class="fg full">
             <label>URLs de imágenes (separar con comas)</label>
             <textarea id="p-imgs" rows="2" placeholder="https://…supabase…/storage/…, https://…"></textarea>
-            <small>Sube las fotos primero en la sección Media y pega las URLs aquí</small>
+            <small>Sube las fotos en Media primero y pega las URLs aquí</small>
           </div>
           <div class="f-actions">
             <button type="button" class="btn btn-ghost" onclick="closeOv('ov-p')">Cancelar</button>
@@ -610,7 +403,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
   </div>
 </div>
 
-<!-- ══════════ MODAL: LEAD ══════════ -->
+<!-- MODAL: LEAD -->
 <div class="overlay" id="ov-l">
   <div class="modal" style="max-width:520px">
     <div class="modal-head"><h3>Detalle del Lead</h3><button class="modal-x" onclick="closeOv('ov-l')">✕</button></div>
@@ -621,17 +414,17 @@ tr:hover td{background:rgba(255,255,255,.018)}
 <div class="toasts" id="toasts"></div>
 
 <script>
-// ═══════════════════════════════════
+// ═══════════════════════
 // CONFIG
-// ═══════════════════════════════════
+// ═══════════════════════
 const SBU='https://cqwvnvcjxbeskvyqrank.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxd3ZudmNqeGJlc2t2eXFyYW5rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMjg5OTMsImV4cCI6MjA4ODYwNDk5M30.pavJBT9fpyoKPH9zbn-9pcUY72gaOB6qL76QMCtFoWw';
 const BKT='gpga-media';
 const H={'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=representation'};
 
-// ═══════════════════════════════════
-// API HELPERS
-// ═══════════════════════════════════
+// ═══════════════════════
+// API
+// ═══════════════════════
 async function GET(t,p){const r=await fetch(SBU+'/rest/v1/'+t+'?'+(p||''),{headers:H});if(!r.ok)throw new Error(await r.text());return r.json();}
 async function POST(t,d){const r=await fetch(SBU+'/rest/v1/'+t,{method:'POST',headers:H,body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
 async function PATCH(t,id,d){const r=await fetch(SBU+'/rest/v1/'+t+'?id=eq.'+id,{method:'PATCH',headers:H,body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
@@ -639,9 +432,9 @@ async function DEL(t,id){const r=await fetch(SBU+'/rest/v1/'+t+'?id=eq.'+id,{met
 async function UPSERT(t,d,c){const r=await fetch(SBU+'/rest/v1/'+t+'?on_conflict='+c,{method:'POST',headers:{...H,'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify(d)});if(!r.ok)throw new Error(await r.text());return r.json();}
 async function CNT(t,p){const r=await fetch(SBU+'/rest/v1/'+t+'?select=id&'+(p||''),{headers:{...H,'Prefer':'count=exact'}});return parseInt(r.headers.get('Content-Range')?.split('/')[1]||0);}
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // NAV
-// ═══════════════════════════════════
+// ═══════════════════════
 const VIEWS={dashboard:'Dashboard',properties:'Properties',leads:'Leads',settings:'Site Settings',media:'Media'};
 document.querySelectorAll('.s-item').forEach(b=>{
   b.addEventListener('click',()=>{
@@ -658,13 +451,11 @@ document.querySelectorAll('.s-item').forEach(b=>{
   });
 });
 function goTo(v){document.querySelector('.s-item[data-view="'+v+'"]').click();}
-
-// Date in topbar
 document.getElementById('tb-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // TOAST
-// ═══════════════════════════════════
+// ═══════════════════════
 function toast(msg,type='ok'){
   const icons={ok:'✅',err:'❌',inf:'ℹ️'};
   const w=document.getElementById('toasts');
@@ -676,81 +467,72 @@ function toast(msg,type='ok'){
   setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350);},3200);
 }
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // MODAL
-// ═══════════════════════════════════
+// ═══════════════════════
 function closeOv(id){document.getElementById(id).classList.remove('open');}
 function openOv(id){document.getElementById(id).classList.add('open');}
 document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // DASHBOARD
-// ═══════════════════════════════════
+// ═══════════════════════
 async function loadDashboard(){
   try{
     const[tp,tl,nl,av]=await Promise.all([CNT('properties'),CNT('leads'),CNT('leads','status=eq.new'),CNT('properties','status=eq.available')]);
-    ['sv-p','sv-l','sv-n','sv-a'].forEach((id,i)=>{
-      const vals=[tp,tl,nl,av];
-      const el=document.getElementById(id);
-      el.textContent=vals[i];
-    });
+    ['sv-p','sv-l','sv-n','sv-a'].forEach((id,i)=>{document.getElementById(id).textContent=[tp,tl,nl,av][i];});
     document.getElementById('nc-p').textContent=tp;
     document.getElementById('nc-l').textContent=nl;
-    document.getElementById('cdot').classList.add('ok');
+    document.getElementById('cdot').className='conn-dot ok';
     document.getElementById('ctxt').textContent='Conectado';
-
-    const[leads,props]=await Promise.all([
-      GET('leads','order=created_at.desc&limit=5'),
-      GET('properties','order=created_at.desc&limit=5')
-    ]);
-
+    const[leads,props]=await Promise.all([GET('leads','order=created_at.desc&limit=5'),GET('properties','order=created_at.desc&limit=5')]);
     const dl=document.getElementById('d-leads');
     if(!leads.length){dl.innerHTML='<div class="empty"><span class="empty-icon">📭</span><p>Sin leads todavía</p></div>';}
     else dl.innerHTML='<table><thead><tr><th>Nombre</th><th>Teléfono</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>'+
-      leads.map(l=>'<tr><td><strong>'+esc(l.name||'—')+'</strong></td><td style="color:var(--brand);font-weight:600">'+esc(l.phone||'—')+'</td><td style="color:var(--text-faint);font-size:11px;font-family:var(--mono)">'+fd(l.created_at)+'</td><td><span class="badge b-'+(l.status||'new')+'">'+(l.status||'new')+'</span></td></tr>').join('')+'</tbody></table>';
-
+      leads.map(l=>'<tr><td><strong>'+esc(l.name||'—')+'</strong></td><td style="color:var(--brand);font-weight:600">'+esc(l.phone||'—')+'</td><td style="color:var(--text-faint);font-size:11px">'+fd(l.created_at)+'</td><td><span class="badge b-'+(l.status||'new')+'">'+(l.status||'new')+'</span></td></tr>').join('')+'</tbody></table>';
     const dp=document.getElementById('d-props');
     if(!props.length){dp.innerHTML='<div class="empty"><span class="empty-icon">🏠</span><p>Sin propiedades</p></div>';}
     else dp.innerHTML='<table><thead><tr><th>Título</th><th>Precio</th><th>Estado</th></tr></thead><tbody>'+
       props.map(p=>'<tr><td><strong>'+esc(p.title)+'</strong></td><td style="color:var(--brand);font-weight:700;font-family:DM Mono,monospace">'+(p.price?'$'+Number(p.price).toLocaleString():'—')+'</td><td><span class="badge b-'+p.status+'">'+p.status+'</span></td></tr>').join('')+'</tbody></table>';
-
   }catch(e){
-    document.getElementById('cdot').classList.add('err');
+    document.getElementById('cdot').className='conn-dot err';
     document.getElementById('ctxt').textContent='Error';
     toast('Error de conexión con Supabase','err');
   }
 }
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // PROPERTIES
-// ═══════════════════════════════════
+// ═══════════════════════
 async function loadProps(){
-  document.getElementById('ptbl').innerHTML='<div class="loading"><span class="spin"></span>Cargando propiedades…</div>';
+  document.getElementById('ptbl').innerHTML='<div class="loading"><span class="spin"></span>Cargando…</div>';
   try{
     const ps=await GET('properties','order=featured.desc,sort_order.asc,created_at.desc');
     if(!ps.length){document.getElementById('ptbl').innerHTML='<div class="empty"><span class="empty-icon">🏠</span><h4>Sin propiedades aún</h4><p>Agrega tu primera propiedad</p></div>';return;}
-    document.getElementById('ptbl').innerHTML='<div class="tw"><table><thead><tr><th>Título</th><th>Ciudad / Zip</th><th>Precio</th><th>Tipo</th><th>Bed / Bath</th><th>Estado</th><th></th></tr></thead><tbody>'+
+    document.getElementById('ptbl').innerHTML='<div class="tw"><table><thead><tr><th>Título</th><th>Ciudad</th><th>Precio</th><th>Tipo</th><th>Bed/Bath</th><th>Estado</th><th>Featured</th><th></th></tr></thead><tbody>'+
       ps.map(p=>'<tr>'+
-        '<td><strong>'+esc(p.title)+'</strong>'+(p.featured?' <span class="badge b-available" style="font-size:9px">⭐ Featured</span>':'')+'</td>'+
+        '<td><strong>'+esc(p.title)+'</strong></td>'+
         '<td style="color:var(--text-dim)">'+(p.city||'—')+(p.zip?' '+p.zip:'')+'</td>'+
         '<td style="color:var(--brand);font-weight:700;font-family:DM Mono,monospace">'+(p.price?'$'+Number(p.price).toLocaleString():'—')+'</td>'+
-        '<td><span style="font-size:11px;color:var(--text-dim)">'+(p.property_type||'—')+'</span></td>'+
-        '<td style="color:var(--text-dim);font-size:12px">'+(p.bedrooms?p.bedrooms+' bd':'')+' '+(p.bathrooms?p.bathrooms+' ba':'')+'</td>'+
+        '<td style="font-size:11px;color:var(--text-dim)">'+(p.property_type||'—')+'</td>'+
+        '<td style="color:var(--text-dim);font-size:12px">'+(p.bedrooms?p.bedrooms+'bd ':'')+' '+(p.bathrooms?p.bathrooms+'ba':'')+'</td>'+
         '<td><span class="badge b-'+p.status+'">'+p.status+'</span></td>'+
+        '<td><button class="btn btn-ghost btn-sm" onclick="toggleFeatured(\''+p.id+'\','+p.featured+')" title="Toggle featured" style="'+(p.featured?'color:var(--amber)':'')+'">'+(p.featured?'⭐ Sí':'☆ No')+'</button></td>'+
         '<td><div class="tda">'+
           '<button class="btn btn-ghost btn-sm btn-icon" onclick=\'editP('+JSON.stringify(p).replace(/'/g,"&#39;")+')\'  title="Editar">✏️</button>'+
-          '<button class="btn btn-danger btn-sm btn-icon" onclick="delP(\''+p.id+'\',\''+p.title.replace(/'/g,"\\'")+'\''+')" title="Eliminar">🗑</button>'+
+          '<button class="btn btn-danger btn-sm btn-icon" onclick="delP(\''+p.id+'\',\''+p.title.replace(/'/g,"\\'")+'\')" title="Eliminar">🗑</button>'+
         '</div></td>'+
-      '</tr>').join('')+
-    '</tbody></table></div>';
+      '</tr>').join('')+'</tbody></table></div>';
   }catch(e){toast('Error cargando propiedades','err');}
+}
+async function toggleFeatured(id, current){
+  try{await PATCH('properties',id,{featured:!current,updated_at:new Date().toISOString()});toast(!current?'Marcada como Featured ⭐':'Featured removido');loadProps();}
+  catch(e){toast('Error','err');}
 }
 function openPM(p=null){
   document.getElementById('pm-title').textContent=p?'Editar Propiedad':'Nueva Propiedad';
   const fields={title:'title',addr:'address',city:'city',zip:'zip',price:'price',bed:'bedrooms',bath:'bathrooms',sqft:'sqft',lot:'lot_size',desc:'description'};
-  Object.entries(fields).forEach(([fid,key])=>{
-    const el=document.getElementById('p-'+fid);if(el)el.value=p?.[key]||'';
-  });
+  Object.entries(fields).forEach(([fid,key])=>{const el=document.getElementById('p-'+fid);if(el)el.value=p?.[key]||'';});
   document.getElementById('p-id').value=p?.id||'';
   document.getElementById('p-status').value=p?.status||'available';
   document.getElementById('p-type').value=p?.property_type||'single-family';
@@ -763,31 +545,15 @@ function editP(p){openPM(p);}
 async function saveProp(e){
   e.preventDefault();
   const id=document.getElementById('p-id').value;
-  const d={
-    title:v('p-title'),address:v('p-addr'),city:v('p-city'),zip:v('p-zip'),
-    price:parseFloat(v('p-price'))||null,status:v('p-status'),property_type:v('p-type'),
-    featured:v('p-feat')==='true',
-    bedrooms:parseInt(v('p-bed'))||null,bathrooms:parseFloat(v('p-bath'))||null,
-    sqft:parseInt(v('p-sqft'))||null,lot_size:v('p-lot'),description:v('p-desc'),
-    features:v('p-features').split(',').map(s=>s.trim()).filter(Boolean),
-    images:v('p-imgs').split(',').map(s=>s.trim()).filter(Boolean),
-    updated_at:new Date().toISOString()
-  };
-  try{
-    if(id)await PATCH('properties',id,d);else await POST('properties',d);
-    toast(id?'Propiedad actualizada ✓':'Propiedad creada ✓');
-    closeOv('ov-p');loadProps();loadDashboard();
-  }catch(e){toast('Error: '+e.message,'err');}
+  const d={title:v('p-title'),address:v('p-addr'),city:v('p-city'),zip:v('p-zip'),price:parseFloat(v('p-price'))||null,status:v('p-status'),property_type:v('p-type'),featured:v('p-feat')==='true',bedrooms:parseInt(v('p-bed'))||null,bathrooms:parseFloat(v('p-bath'))||null,sqft:parseInt(v('p-sqft'))||null,lot_size:v('p-lot'),description:v('p-desc'),features:v('p-features').split(',').map(s=>s.trim()).filter(Boolean),images:v('p-imgs').split(',').map(s=>s.trim()).filter(Boolean),updated_at:new Date().toISOString()};
+  try{if(id)await PATCH('properties',id,d);else await POST('properties',d);toast(id?'Propiedad actualizada ✓':'Propiedad creada ✓');closeOv('ov-p');loadProps();loadDashboard();}
+  catch(e){toast('Error: '+e.message,'err');}
 }
-async function delP(id,title){
-  if(!confirm('¿Eliminar "'+title+'"?'))return;
-  try{await DEL('properties',id);toast('Propiedad eliminada');loadProps();loadDashboard();}
-  catch(e){toast('Error','err');}
-}
+async function delP(id,title){if(!confirm('¿Eliminar "'+title+'"?'))return;try{await DEL('properties',id);toast('Propiedad eliminada');loadProps();loadDashboard();}catch(e){toast('Error','err');}}
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // LEADS
-// ═══════════════════════════════════
+// ═══════════════════════
 async function loadLeads(){
   document.getElementById('ltbl').innerHTML='<div class="loading"><span class="spin"></span>Cargando leads…</div>';
   const f=document.getElementById('lf')?.value;
@@ -798,36 +564,33 @@ async function loadLeads(){
     document.getElementById('ltbl').innerHTML='<div class="tw"><table><thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Zip</th><th>Fuente</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody>'+
       ls.map(l=>'<tr>'+
         '<td><strong>'+esc(l.name||'—')+'</strong></td>'+
-        '<td style="color:var(--text-dim);font-size:11.5px">'+esc(l.email||'—')+'</td>'+
+        '<td style="font-size:11.5px">'+esc(l.email||'—')+'</td>'+
         '<td><a href="tel:'+esc(l.phone)+'" style="color:var(--brand);font-weight:600;text-decoration:none">'+esc(l.phone||'—')+'</a></td>'+
-        '<td style="color:var(--text-dim)">'+esc(l.zip||'—')+'</td>'+
-        '<td><span style="font-size:10.5px;color:var(--text-faint)">'+esc(l.source||'website')+'</span></td>'+
-        '<td style="font-size:11px;color:var(--text-faint);font-family:DM Mono,monospace">'+fd(l.created_at)+'</td>'+
+        '<td>'+esc(l.zip||'—')+'</td>'+
+        '<td style="font-size:10.5px;color:var(--text-faint)">'+esc(l.source||'website')+'</td>'+
+        '<td style="font-size:11px;color:var(--text-faint)">'+fd(l.created_at)+'</td>'+
         '<td><select onchange="updL(\''+l.id+'\',this.value)" style="background:var(--raised);border:1px solid var(--border);border-radius:6px;padding:4px 7px;color:var(--text);font-size:11px;font-family:\'DM Sans\',sans-serif">'+
           ['new','contacted','qualified','closed','dead'].map(s=>'<option value="'+s+'"'+(l.status===s?' selected':'')+'>'+s+'</option>').join('')+'</select></td>'+
         '<td><div class="tda">'+
-          '<button class="btn btn-ghost btn-sm btn-icon" onclick=\'openL('+JSON.stringify(l).replace(/'/g,"&#39;")+')\' title="Ver detalle">👁</button>'+
-          '<button class="btn btn-danger btn-sm btn-icon" onclick="delL(\''+l.id+'\''+')" title="Eliminar">🗑</button>'+
+          '<button class="btn btn-ghost btn-sm btn-icon" onclick=\'openL('+JSON.stringify(l).replace(/'/g,"&#39;")+')\'  title="Ver">👁</button>'+
+          '<button class="btn btn-danger btn-sm btn-icon" onclick="delL(\''+l.id+'\')" title="Eliminar">🗑</button>'+
         '</div></td>'+
       '</tr>').join('')+'</tbody></table></div>';
   }catch(e){toast('Error cargando leads','err');}
 }
-async function updL(id,st){
-  try{await PATCH('leads',id,{status:st});toast('Lead marcado como "'+st+'"','inf');loadDashboard();}
-  catch(e){toast('Error','err');}
-}
+async function updL(id,st){try{await PATCH('leads',id,{status:st});toast('Lead: "'+st+'"','inf');loadDashboard();}catch(e){toast('Error','err');}}
 function openL(l){
   document.getElementById('lm-body').innerHTML=
     '<div class="lgrid">'+
       '<div class="lfield"><label>Nombre</label><span>'+esc(l.name||'—')+'</span></div>'+
       '<div class="lfield"><label>Teléfono</label><span><a href="tel:'+esc(l.phone)+'" style="color:var(--brand);font-weight:600;text-decoration:none">'+esc(l.phone||'—')+'</a></span></div>'+
       '<div class="lfield"><label>Email</label><span>'+esc(l.email||'—')+'</span></div>'+
-      '<div class="lfield"><label>Zip Code</label><span>'+esc(l.zip||'—')+'</span></div>'+
+      '<div class="lfield"><label>Zip</label><span>'+esc(l.zip||'—')+'</span></div>'+
       '<div class="lfield"><label>Fuente</label><span>'+esc(l.source||'website')+'</span></div>'+
       '<div class="lfield"><label>Fecha</label><span>'+fd(l.created_at)+'</span></div>'+
-      '<div class="lfield" style="grid-column:1/-1"><label>Dirección / Propiedad</label><span>'+esc(l.address||'—')+'</span></div>'+
+      '<div class="lfield" style="grid-column:1/-1"><label>Dirección</label><span>'+esc(l.address||'—')+'</span></div>'+
       '<div class="lfield" style="grid-column:1/-1"><label>Mensaje</label><span style="line-height:1.6">'+esc(l.message||'—')+'</span></div>'+
-      '<div class="lfield"><label>Cambiar Estado</label>'+
+      '<div class="lfield"><label>Estado</label>'+
         '<select onchange="updL(\''+l.id+'\',this.value)" style="background:var(--raised);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);width:100%;margin-top:2px">'+
           ['new','contacted','qualified','closed','dead'].map(s=>'<option value="'+s+'"'+(l.status===s?' selected':'')+'>'+s+'</option>').join('')+
         '</select></div>'+
@@ -839,11 +602,7 @@ function openL(l){
     '</div>';
   openOv('ov-l');
 }
-async function delL(id){
-  if(!confirm('¿Eliminar este lead?'))return;
-  try{await DEL('leads',id);toast('Lead eliminado');loadLeads();loadDashboard();}
-  catch(e){toast('Error','err');}
-}
+async function delL(id){if(!confirm('¿Eliminar este lead?'))return;try{await DEL('leads',id);toast('Lead eliminado');loadLeads();loadDashboard();}catch(e){toast('Error','err');}}
 function exportCSV(){
   GET('leads','order=created_at.desc&limit=2000').then(ls=>{
     const cols=['name','email','phone','zip','source','status','created_at','address','message'];
@@ -855,76 +614,67 @@ function exportCSV(){
   }).catch(()=>toast('Error exportando','err'));
 }
 
-// ═══════════════════════════════════
-// SETTINGS
-// ═══════════════════════════════════
+// ═══════════════════════════════════════
+// SETTINGS — full site control
+// ═══════════════════════════════════════
 let SC={};
-const SECS=['contact','branding','homepage','about','sell','footer','seo'];
 
-// Default settings seed — ensures all keys exist in Supabase
-const SETTINGS_SEED = [
+const FONTS_DISPLAY = ['Cormorant Garamond','Playfair Display','Libre Baskerville','EB Garamond','Merriweather'];
+const FONTS_BODY    = ['DM Sans','Outfit','Jost','Raleway','Lato','Montserrat','Open Sans'];
+
+const SETTINGS_SEED=[
   // contact
-  {key:'site_phone',section:'contact',label:'Teléfono',type:'text',value:'404-590-1613'},
-  {key:'site_email',section:'contact',label:'Email',type:'text',value:'info@greatpropertiesga.com'},
-  {key:'site_address',section:'contact',label:'Dirección de oficina',type:'text',value:'Serving all of Georgia'},
-  {key:'site_hours',section:'contact',label:'Horario de atención',type:'text',value:'Mon–Fri 9am–6pm'},
+  {key:'site_phone',    section:'contact', label:'Teléfono',           type:'text',      value:'404-590-1613'},
+  {key:'site_email',    section:'contact', label:'Email',              type:'text',      value:'info@greatpropertiesga.com'},
+  {key:'site_address',  section:'contact', label:'Dirección / Área',   type:'text',      value:'Serving all of Georgia'},
+  {key:'site_hours',    section:'contact', label:'Horario de atención', type:'text',      value:'Mon–Fri 9am–6pm'},
   // branding
-  {key:'logo_url',section:'branding',label:'Logo URL (imagen)',type:'image_url',value:''},
-  {key:'logo_text',section:'branding',label:'Nombre del sitio',type:'text',value:'Great Properties GA'},
-  {key:'logo_tagline',section:'branding',label:'Tagline bajo el logo',type:'text',value:'Serious About Buying. Serious About Closing.'},
-  {key:'brand_color',section:'branding',label:'Color principal (brand)',type:'color',value:'#c9a84c'},
-  {key:'brand_color_2',section:'branding',label:'Color secundario (fondo)',type:'color',value:'#0a0a0a'},
-  {key:'font_display',section:'branding',label:'Fuente de títulos',type:'text',value:'Cormorant Garamond'},
-  {key:'font_body',section:'branding',label:'Fuente de cuerpo',type:'text',value:'DM Sans'},
+  {key:'logo_url',      section:'branding',label:'Logo — URL de imagen',type:'image_url', value:''},
+  {key:'logo_text',     section:'branding',label:'Nombre del negocio',  type:'text',      value:'Great Properties GA'},
+  {key:'logo_tagline',  section:'branding',label:'Tagline bajo el logo',type:'text',      value:'Serious About Buying. Serious About Closing.'},
+  // colors
+  {key:'brand_color',   section:'colors',  label:'Color principal (brand)',   type:'color', value:'#c9a84c'},
+  {key:'brand_color_2', section:'colors',  label:'Color secundario',          type:'color', value:'#0a0a0a'},
+  {key:'bg_color',      section:'colors',  label:'Color de fondo principal',  type:'color', value:'#ffffff'},
+  {key:'bg_color_2',    section:'colors',  label:'Color de fondo secundario', type:'color', value:'#f7f5f2'},
+  {key:'text_color',    section:'colors',  label:'Color de texto',            type:'color', value:'#1a1410'},
+  // fonts
+  {key:'font_display',  section:'fonts',   label:'Fuente de títulos',  type:'font_display', value:'Cormorant Garamond'},
+  {key:'font_body',     section:'fonts',   label:'Fuente de cuerpo',   type:'font_body',    value:'DM Sans'},
   // homepage
-  {key:'hero_title',section:'homepage',label:'Hero — Título principal',type:'textarea',value:'Georgia Real Estate
-Done Right.'},
-  {key:'hero_subtitle',section:'homepage',label:'Hero — Subtítulo',type:'textarea',value:'We buy, renovate, and sell exceptional properties across all of Georgia.'},
-  {key:'hero_image_url',section:'homepage',label:'Hero — Imagen de fondo URL',type:'image_url',value:''},
-  {key:'hero_cta_text',section:'homepage',label:'Hero — Texto del botón CTA',type:'text',value:'Get My Cash Offer'},
-  {key:'hero_cta_url',section:'homepage',label:'Hero — URL del botón CTA',type:'text',value:'sell.html'},
-  {key:'section_hero',section:'homepage',label:'Mostrar sección Hero',type:'text',value:'true'},
-  {key:'section_how_it_works',section:'homepage',label:'Mostrar sección How It Works',type:'text',value:'true'},
-  {key:'section_properties',section:'homepage',label:'Mostrar sección Properties',type:'text',value:'true'},
-  {key:'section_testimonials',section:'homepage',label:'Mostrar sección Testimonios',type:'text',value:'true'},
-  {key:'section_about_band',section:'homepage',label:'Mostrar banda About',type:'text',value:'true'},
+  {key:'hero_title',     section:'homepage',label:'Hero — Título',       type:'textarea', value:'Need to sell quickly?\nWe can help.'},
+  {key:'hero_subtitle',  section:'homepage',label:'Hero — Subtítulo',    type:'textarea', value:'Great Properties GA buys houses across all of Georgia.'},
+  {key:'hero_cta_text',  section:'homepage',label:'Hero — Texto del CTA',type:'text',     value:'Get Your Cash Offer →'},
+  {key:'hero_image_url', section:'homepage',label:'Hero — Imagen de fondo URL', type:'image_url', value:''},
+  {key:'section_hero',         section:'homepage',label:'Mostrar sección Hero',       type:'text',value:'true'},
+  {key:'section_how_it_works', section:'homepage',label:'Mostrar sección Cómo Funciona',type:'text',value:'true'},
+  {key:'section_properties',   section:'homepage',label:'Mostrar sección Properties', type:'text',value:'true'},
+  {key:'section_testimonials',  section:'homepage',label:'Mostrar Testimonios',        type:'text',value:'true'},
   // about
-  {key:'about_title',section:'about',label:'About — Título de la página',type:'text',value:'About Great Properties GA'},
-  {key:'about_subtitle',section:'about',label:'About — Subtítulo',type:'textarea',value:'Georgia's trusted real estate investment company.'},
-  {key:'about_story',section:'about',label:'About — Historia / texto principal',type:'textarea',value:''},
-  {key:'about_image_url',section:'about',label:'About — Imagen del equipo URL',type:'image_url',value:''},
-  // sell
-  {key:'sell_title',section:'sell',label:'Sell Page — Título',type:'text',value:'Sell Your Home Fast'},
-  {key:'sell_subtitle',section:'sell',label:'Sell Page — Subtítulo',type:'textarea',value:'We buy houses in any condition across Georgia. Get a cash offer in 24 hours.'},
-  {key:'sell_form_title',section:'sell',label:'Sell Page — Título del formulario',type:'text',value:'Get Your Cash Offer'},
-  {key:'sell_steps_title',section:'sell',label:'Sell Page — Título de los pasos',type:'text',value:'How It Works'},
+  {key:'about_title',    section:'about',  label:'About — Título',       type:'text',     value:'About Great Properties GA'},
+  {key:'about_subtitle', section:'about',  label:'About — Subtítulo',    type:'textarea', value:''},
+  {key:'about_image_url',section:'about',  label:'About — Imagen URL',   type:'image_url',value:''},
   // footer
-  {key:'footer_text',section:'footer',label:'Footer — Descripción de la empresa',type:'textarea',value:'Georgia's trusted real estate investment company. We buy, renovate, and sell properties across all of Georgia.'},
-  {key:'footer_slogan',section:'footer',label:'Footer — Slogan',type:'text',value:'Serious About Buying. Serious About Closing.'},
-  {key:'footer_facebook',section:'footer',label:'Footer — Facebook URL',type:'text',value:''},
-  {key:'footer_instagram',section:'footer',label:'Footer — Instagram URL',type:'text',value:''},
+  {key:'footer_text',    section:'footer', label:'Descripción de empresa',type:'textarea', value:"Georgia's trusted real estate investment company."},
+  {key:'footer_slogan',  section:'footer', label:'Slogan del footer',     type:'text',     value:'Serious About Buying. Serious About Closing.'},
+  {key:'footer_facebook',section:'footer', label:'Facebook URL',          type:'text',     value:''},
+  {key:'footer_instagram',section:'footer',label:'Instagram URL',         type:'text',     value:''},
   // seo
-  {key:'meta_title',section:'seo',label:'SEO — Meta Title',type:'text',value:'Great Properties GA, LLC — Georgia Real Estate'},
-  {key:'meta_description',section:'seo',label:'SEO — Meta Description',type:'textarea',value:'Great Properties GA buys houses fast across Georgia. Cash offers within 24 hours.'},
-  {key:'og_image_url',section:'seo',label:'SEO — OG Image URL',type:'image_url',value:''},
+  {key:'meta_title',      section:'seo',   label:'SEO — Meta Title',       type:'text',     value:'Great Properties GA, LLC — Georgia Real Estate'},
+  {key:'meta_description',section:'seo',   label:'SEO — Meta Description', type:'textarea', value:'Great Properties GA buys houses fast across Georgia. Cash offers within 24 hours.'},
+  {key:'og_image_url',    section:'seo',   label:'SEO — OG Image URL',     type:'image_url',value:''},
 ];
+
+const TABS=['contact','branding','colors','fonts','homepage','about','footer','seo'];
 
 async function loadSettings(){
   try{
     const rows=await GET('site_settings','order=section.asc,key.asc');
     SC={};rows.forEach(r=>SC[r.key]=r);
-    // Merge seed: add any keys that are missing from DB (display-only, not auto-saved)
-    SETTINGS_SEED.forEach(function(seed){
-      if(!SC[seed.key]){
-        SC[seed.key]={...seed,id:null};
-      } else {
-        // Fill in label/type/section from seed if missing in DB
-        if(!SC[seed.key].label)SC[seed.key].label=seed.label;
-        if(!SC[seed.key].type)SC[seed.key].type=seed.type;
-        if(!SC[seed.key].section)SC[seed.key].section=seed.section;
-      }
+    SETTINGS_SEED.forEach(seed=>{
+      if(!SC[seed.key]) SC[seed.key]={...seed,id:null};
+      else { if(!SC[seed.key].label)SC[seed.key].label=seed.label; if(!SC[seed.key].type)SC[seed.key].type=seed.type; if(!SC[seed.key].section)SC[seed.key].section=seed.section; }
     });
-    // Build rows from merged SC
     const merged=SETTINGS_SEED.map(s=>SC[s.key]).filter(Boolean);
     renderSettings(merged);
   }catch(e){toast('Error cargando settings','err');}
@@ -933,8 +683,7 @@ async function loadSettings(){
 function renderSettings(rows){
   const byS={};
   rows.forEach(r=>{if(!byS[r.section])byS[r.section]=[];byS[r.section].push(r);});
-
-  document.getElementById('sbody').innerHTML=SECS.map((sec,i)=>`
+  document.getElementById('sbody').innerHTML=TABS.map((sec,i)=>`
     <div class="spanel ${i===0?'on':''}" id="st-${sec}">
       <div class="card">
         <div class="card-body">
@@ -946,15 +695,26 @@ function renderSettings(rows){
             </div>`).join('')||'<p style="color:var(--text-faint);font-size:12px;padding:8px 0">Sin configuraciones en esta sección</p>'}
         </div>
       </div>
-      ${sec==='branding'?renderPreview():''}
+      ${sec==='colors'?renderColorPreview():''}
+      ${sec==='fonts'?renderFontPreview():''}
     </div>`).join('');
 
-  // Attach live listeners
-  const ce=document.getElementById('setting-brand_color');
-  if(ce){ce.addEventListener('input',updPrev);updPrev();}
-  ['setting-logo_text','setting-logo_url','setting-logo_tagline','setting-hero_title','setting-hero_cta_text'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.addEventListener('input',updPrev);
+  // Live listeners
+  ['brand_color','bg_color','bg_color_2','text_color','brand_color_2'].forEach(k=>{
+    const el=document.getElementById('setting-'+k);
+    if(el) el.addEventListener('input',()=>updColorPrev());
   });
+  ['setting-logo_text','setting-hero_title','setting-hero_cta_text','setting-logo_tagline'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.addEventListener('input',updColorPrev);
+  });
+  ['font_display','font_body'].forEach(k=>{
+    const el=document.getElementById('setting-'+k);
+    if(el) el.addEventListener('change',updFontPrev);
+  });
+  const lu=document.getElementById('setting-logo_url');
+  if(lu) lu.addEventListener('input',updColorPrev);
+  updColorPrev();
+  updFontPrev();
 }
 
 function rInput(s){
@@ -963,15 +723,23 @@ function rInput(s){
     return`<textarea id="setting-${s.key}" rows="2" style="width:100%">${s.value||''}</textarea>`;
   if(s.type==='color')
     return`<div class="cfield">
-      <input type="color" class="cswatch" id="setting-${s.key}" value="${s.value||'#c0392b'}"
-        oninput="syncTxt('${s.key}',this.value);updPrev()">
+      <input type="color" class="cswatch" id="setting-${s.key}" value="${s.value||'#c9a84c'}"
+        oninput="syncTxt('${s.key}',this.value);updColorPrev()">
       <input type="text" id="setting-${s.key}-txt" value="${val}" style="flex:1;font-family:'DM Mono',monospace;font-size:13px"
-        oninput="syncPicker('${s.key}',this.value);updPrev()" placeholder="#c0392b">
+        oninput="syncPicker('${s.key}',this.value);updColorPrev()" placeholder="#c9a84c">
     </div>`;
+  if(s.type==='font_display')
+    return`<select class="font-select" id="setting-${s.key}" onchange="updFontPrev()">
+      ${FONTS_DISPLAY.map(f=>`<option value="${f}" ${(s.value||'Cormorant Garamond')===f?'selected':''}>${f}</option>`).join('')}
+    </select>`;
+  if(s.type==='font_body')
+    return`<select class="font-select" id="setting-${s.key}" onchange="updFontPrev()">
+      ${FONTS_BODY.map(f=>`<option value="${f}" ${(s.value||'DM Sans')===f?'selected':''}>${f}</option>`).join('')}
+    </select>`;
   if(s.type==='image_url')
     return`<div>
-      <input type="url" id="setting-${s.key}" value="${val}" placeholder="https://…" style="width:100%">
-      ${s.value?`<img src="${s.value}" style="height:34px;margin-top:6px;border-radius:5px;display:block;border:1px solid var(--border)" onerror="this.style.display='none'">`:'' }
+      <input type="url" id="setting-${s.key}" value="${val}" placeholder="https://…" style="width:100%" oninput="updColorPrev()">
+      ${s.value?`<img src="${s.value}" style="height:36px;margin-top:6px;border-radius:5px;display:block;border:1px solid var(--border)" onerror="this.style.display='none'">`:'' }
     </div>`;
   return`<input type="text" id="setting-${s.key}" value="${val}" style="width:100%">`;
 }
@@ -979,101 +747,117 @@ function rInput(s){
 function syncTxt(k,val){const e=document.getElementById('setting-'+k+'-txt');if(e)e.value=val;}
 function syncPicker(k,val){const e=document.getElementById('setting-'+k);if(e&&/^#[0-9A-Fa-f]{6}$/.test(val))e.value=val;}
 
-function renderPreview(){
+function getCV(key,fallback=''){
+  const txt=document.getElementById('setting-'+key+'-txt');
+  const el=document.getElementById('setting-'+key);
+  return (txt?txt.value:el?.value)||fallback;
+}
+
+function renderColorPreview(){
   return`<div class="cprev">
-    <div class="cprev-title">Vista Previa en Tiempo Real del Sitio</div>
+    <div class="cprev-title">Vista Previa en Tiempo Real</div>
     <div class="msite">
-      <div class="ms-topbar">
-        <span>FAQs &nbsp;·&nbsp; Contact Us &nbsp;·&nbsp; Why Work With Us? &nbsp;·&nbsp; Buy a Home</span>
-        <span style="color:var(--brand)">📞 404-590-1613</span>
-      </div>
-      <div class="ms-header">
-        <div id="pv-logo-wrap" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center">
-          <img id="pv-logo-img" src="" alt="Logo" style="max-height:36px;max-width:80px;object-fit:contain;display:none">
-          <span id="pv-logo-emoji" style="font-size:22px;line-height:1">🦅</span>
+      <div class="ms-topbar"><span>FAQs · Contact · Why Us</span><span id="pv-phone" style="color:#c9a84c">404-590-1613</span></div>
+      <div class="ms-header" id="pv-header" style="background:#fff">
+        <div id="pv-logo-wrap" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center">
+          <img id="pv-logo-img" src="" style="max-height:32px;max-width:80px;object-fit:contain;display:none" alt="Logo">
+          <span id="pv-logo-emoji" style="font-size:20px">🦅</span>
         </div>
         <div>
-          <div class="ms-logo-name" id="pv-logoname">Great Properties GA, LLC</div>
-          <div class="ms-logo-tag" id="pv-logotag" style="color:#c0392b">SERIOUS ABOUT BUYING. SERIOUS ABOUT CLOSING.</div>
+          <div class="ms-logo-name" id="pv-logoname">Great Properties GA</div>
+          <div class="ms-logo-tag" id="pv-logotag" style="color:#c9a84c">SERIOUS ABOUT BUYING. SERIOUS ABOUT CLOSING.</div>
         </div>
       </div>
-      <div class="ms-nav" id="pv-nav" style="background:#c0392b">
-        <span>Home</span><span>About</span><span>Sell to Us</span><span>Properties for Sale</span><span>Buy a Home</span><span>Contact</span>
-      </div>
-      <div class="ms-hero">
+      <div class="ms-nav" id="pv-nav" style="background:#c9a84c"><span>Home</span><span>About</span><span>Properties</span><span>Contact</span></div>
+      <div class="ms-hero" id="pv-hero-bg" style="background:#111">
         <div class="ms-hero-copy">
-          <h4 id="pv-hero">Need to sell your home quickly?<br>We can help!</h4>
-          <p>We buy all types of properties across Georgia.<br>Fast closings. Cash offers. No commissions.</p>
-          <span class="ms-cta" id="pv-cta" style="background:#c0392b">Get My Cash Offer →</span>
+          <h4 id="pv-hero">Need to sell quickly?<br>We can help.</h4>
+          <p>We buy all types of properties across Georgia.</p>
+          <span class="ms-cta" id="pv-cta" style="background:#c9a84c">Get Your Cash Offer →</span>
         </div>
         <div class="ms-form">
-          <div class="ms-form-title" id="pv-ftitle" style="border-bottom:2px solid #c0392b">Sell Your Home Fast!</div>
-          <div class="ms-line"></div>
-          <div class="ms-line" style="width:70%"></div>
-          <div class="ms-line"></div>
-          <div class="ms-submit" id="pv-submit" style="background:#c0392b">Get Cash Offer →</div>
+          <div class="ms-form-title" id="pv-ftitle" style="border-bottom:2px solid #c9a84c">Sell Fast!</div>
+          <div class="ms-line"></div><div class="ms-line" style="width:70%"></div><div class="ms-line"></div>
+          <div class="ms-submit" id="pv-submit" style="background:#c9a84c">Get Offer →</div>
         </div>
       </div>
-      <div class="ms-footer">
-        <div class="ms-footer-txt">© 2025 Great Properties GA, LLC · Georgia Real Estate Investors</div>
-        <div class="ms-footer-links"><span>Privacy</span><span>Terms</span><span>Contact</span></div>
+      <div class="ms-footer" id="pv-footer-bg" style="background:#111">
+        <div class="ms-footer-txt" id="pv-footer-txt" style="color:#555">© 2025 Great Properties GA, LLC</div>
       </div>
     </div>
   </div>`;
 }
 
-function updPrev(){
-  const ce=document.getElementById('setting-brand_color');
-  if(!ce)return;
-  const c=ce.value||'#c0392b';
-  // Update all brand-colored elements in preview
-  ['pv-nav','pv-cta','pv-submit'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.background=c;
-  });
-  const tag=document.getElementById('pv-logotag');if(tag)tag.style.color=c;
-  const ft=document.getElementById('pv-ftitle');if(ft)ft.style.borderBottomColor=c;
-  // Also update the admin's own --brand variable for immediate UI feedback
-  document.documentElement.style.setProperty('--brand',c);
-  // Compute darker shade for hover
-  document.documentElement.style.setProperty('--brand-dim','rgba('+hexToRgb(c)+',.12)');
-  document.documentElement.style.setProperty('--brand-glow','rgba('+hexToRgb(c)+',.25)');
-  // Logo name
-  const lt=document.getElementById('setting-logo_text');
-  const pn=document.getElementById('pv-logoname');
-  if(lt&&pn)pn.textContent=lt.value||'Great Properties GA, LLC';
-  // Logo tagline
-  const tl=document.getElementById('setting-logo_tagline');
-  const ptg=document.getElementById('pv-logotag');
-  if(tl&&ptg)ptg.textContent=(tl.value||'SERIOUS ABOUT BUYING. SERIOUS ABOUT CLOSING.').toUpperCase();
-  // Logo image preview
-  const lu=document.getElementById('setting-logo_url');
-  const pli=document.getElementById('pv-logo-img');
-  const ple=document.getElementById('pv-logo-emoji');
-  if(lu&&pli){
-    if(lu.value.trim()){
-      pli.src=lu.value.trim();
-      pli.style.display='block';
-      if(ple)ple.style.display='none';
-    } else {
-      pli.style.display='none';
-      if(ple)ple.style.display='';
-    }
-  }
-  // Hero title
-  const ht=document.getElementById('setting-hero_title');
-  const ph=document.getElementById('pv-hero');
-  if(ht&&ph)ph.innerHTML=(ht.value||'Need to sell your home quickly?<br>We can help!').replace(/\n/g,'<br>');
-  // Hero CTA
-  const ct=document.getElementById('setting-hero_cta_text');
-  const pct=document.getElementById('pv-cta');
-  if(ct&&pct)pct.textContent=(ct.value||'Get My Cash Offer →');
+function renderFontPreview(){
+  return`<div class="cprev" style="margin-top:14px">
+    <div class="cprev-title">Vista Previa de Tipografía</div>
+    <div style="background:var(--raised);border-radius:8px;padding:20px">
+      <div id="pv-font-title" style="font-size:26px;font-weight:400;margin-bottom:8px;letter-spacing:-.5px">Georgia Real Estate Done Right.</div>
+      <div id="pv-font-body" style="font-size:13px;color:var(--text-dim);line-height:1.7">We buy, renovate, and sell exceptional properties across all of Georgia. Fast closings. Cash offers. No commissions.</div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <span id="pv-font-label" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:3px 8px;border-radius:4px;background:rgba(var(--brand-rgb),.15);color:var(--brand)">Single-Family</span>
+        <span style="font-size:24px;font-weight:300;color:var(--brand)" id="pv-font-price">$249,000</span>
+      </div>
+    </div>
+  </div>`;
 }
 
-function hexToRgb(hex){
-  hex=hex.replace('#','');
-  if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');
-  const n=parseInt(hex,16);
-  return Math.floor(n>>16)+','+Math.floor((n>>8)&255)+','+Math.floor(n&255);
+function updColorPrev(){
+  const brand  = getCV('brand_color','#c9a84c');
+  const bg     = getCV('bg_color','#ffffff');
+  const bg2    = getCV('bg_color_2','#f7f5f2');
+  const txt    = getCV('text_color','#1a1410');
+  const logo   = getCV('logo_text','Great Properties GA');
+  const tag    = getCV('logo_tagline','Serious About Buying. Serious About Closing.');
+  const hero   = getCV('hero_title','Need to sell quickly?\nWe can help.');
+  const cta    = getCV('hero_cta_text','Get Your Cash Offer →');
+  const logoUrl= getCV('logo_url','');
+
+  // Update preview elements
+  const upd=(id,prop,val)=>{const e=document.getElementById(id);if(e)e.style[prop]=val;};
+  const setText=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=val;};
+  const setHtml=(id,val)=>{const e=document.getElementById(id);if(e)e.innerHTML=val;};
+
+  upd('pv-nav','background',brand);
+  upd('pv-cta','background',brand);
+  upd('pv-submit','background',brand);
+  upd('pv-logotag','color',brand);
+  upd('pv-ftitle','borderBottomColor',brand);
+  upd('pv-header','background',bg);
+  upd('pv-hero-bg','background',bg2==='#f7f5f2'?'#111':bg2);
+  upd('pv-footer-bg','background',bg2==='#f7f5f2'?'#1a1a1a':bg2);
+  setText('pv-logoname',logo);
+  setText('pv-logotag',(tag||'').toUpperCase());
+  setHtml('pv-hero',(hero||'').replace(/\n/g,'<br>'));
+  setText('pv-cta',cta);
+
+  // Logo image preview
+  const pli=document.getElementById('pv-logo-img');
+  const ple=document.getElementById('pv-logo-emoji');
+  if(pli){
+    if(logoUrl.trim()){pli.src=logoUrl.trim();pli.style.display='block';if(ple)ple.style.display='none';}
+    else{pli.style.display='none';if(ple)ple.style.display='';}
+  }
+}
+
+function updFontPrev(){
+  const df=document.getElementById('setting-font_display')?.value||'Cormorant Garamond';
+  const bf=document.getElementById('setting-font_body')?.value||'DM Sans';
+  // Load preview fonts
+  const existing=document.getElementById('pv-font-link');
+  if(existing)existing.remove();
+  const lnk=document.createElement('link');
+  lnk.id='pv-font-link';lnk.rel='stylesheet';
+  lnk.href='https://fonts.googleapis.com/css2?family='+df.replace(/ /g,'+')+'&family='+bf.replace(/ /g,'+')+':wght@400;600&display=swap';
+  document.head.appendChild(lnk);
+  const t=document.getElementById('pv-font-title');
+  const b=document.getElementById('pv-font-body');
+  const pr=document.getElementById('pv-font-price');
+  if(t)t.style.fontFamily="'"+df+"', Georgia, serif";
+  if(b)b.style.fontFamily="'"+bf+"', sans-serif";
+  if(pr)pr.style.fontFamily="'"+df+"', Georgia, serif";
+  const fl=document.getElementById('pv-font-label');
+  if(fl)fl.style.fontFamily="'"+bf+"', sans-serif";
 }
 
 function switchTab(btn,pid){
@@ -1085,45 +869,49 @@ function switchTab(btn,pid){
 async function saveSetting(key){
   const el=document.getElementById('setting-'+key);
   const txt=document.getElementById('setting-'+key+'-txt');
-  const value=SC[key]?.type==='color'&&txt?txt.value:el?.value;
+  const value=(SC[key]?.type==='color'&&txt)?txt.value:el?.value;
   try{
-    await UPSERT('site_settings',{key,value,updated_at:new Date().toISOString()},'key');
+    await UPSERT('site_settings',{key,value,section:SC[key]?.section||'misc',label:SC[key]?.label||key,type:SC[key]?.type||'text',updated_at:new Date().toISOString()},'key');
     SC[key]={...SC[key],value};
     toast('"'+(SC[key]?.label||key)+'" guardado ✓');
-    updPrev();
+    updColorPrev();
   }catch(e){toast('Error: '+e.message,'err');}
 }
 
 async function saveAll(){
   let n=0,errs=0;
-  for(const key of Object.keys(SC)){
+  const keys=SETTINGS_SEED.map(s=>s.key);
+  for(const key of keys){
     const el=document.getElementById('setting-'+key);
     const txt=document.getElementById('setting-'+key+'-txt');
     if(!el)continue;
-    const value=SC[key]?.type==='color'&&txt?txt.value:el.value;
-    try{await UPSERT('site_settings',{key,value,updated_at:new Date().toISOString()},'key');n++;}
-    catch(e){errs++;}
+    const value=(SC[key]?.type==='color'&&txt)?txt.value:el.value;
+    try{
+      await UPSERT('site_settings',{key,value,section:SC[key]?.section||'misc',label:SC[key]?.label||key,type:SC[key]?.type||'text',updated_at:new Date().toISOString()},'key');
+      SC[key]={...SC[key],value};
+      n++;
+    }catch(e){errs++;}
   }
   toast(n+' configuraciones guardadas'+(errs?' ('+errs+' errores)':'')+'  ✓');
+  updColorPrev();
 }
 
-// ═══════════════════════════════════
+// Clear site localStorage cache so visitors get fresh settings immediately
+function clearSiteCache(){
+  // The site uses key 'gpga_theme_v3' — broadcast a note in the admin
+  toast('Cache limpiado. Los visitantes verán los cambios en su próxima visita.','inf');
+}
+
+// ═══════════════════════
 // MEDIA
-// ═══════════════════════════════════
+// ═══════════════════════
 async function loadMedia(){
   document.getElementById('mbody').innerHTML='<div class="loading"><span class="spin"></span>Cargando archivos…</div>';
   try{
-    const r=await fetch(SBU+'/storage/v1/object/list/'+BKT,{
-      method:'POST',
-      headers:{...H,'Content-Type':'application/json'},
-      body:JSON.stringify({limit:200,offset:0,sortBy:{column:'created_at',order:'desc'}})
-    });
+    const r=await fetch(SBU+'/storage/v1/object/list/'+BKT,{method:'POST',headers:{...H,'Content-Type':'application/json'},body:JSON.stringify({limit:200,offset:0,sortBy:{column:'created_at',order:'desc'}})});
     if(!r.ok)throw new Error();
     const files=await r.json();
-    if(!files||!files.length){
-      document.getElementById('mbody').innerHTML='<div class="empty"><span class="empty-icon">🖼</span><h4>Sin archivos</h4><p>Sube imágenes arriba para empezar</p></div>';
-      return;
-    }
+    if(!files||!files.length){document.getElementById('mbody').innerHTML='<div class="empty"><span class="empty-icon">🖼</span><h4>Sin archivos</h4><p>Sube imágenes arriba para empezar</p></div>';return;}
     document.getElementById('mbody').innerHTML='<div class="mgrid">'+files.map(f=>{
       const url=SBU+'/storage/v1/object/public/'+BKT+'/'+encodeURIComponent(f.name);
       const isImg=/\.(jpg|jpeg|png|webp|gif|svg|avif)$/i.test(f.name);
@@ -1139,70 +927,44 @@ async function loadMedia(){
         '</div>'+
       '</div>';
     }).join('')+'</div>';
-  }catch(e){
-    document.getElementById('mbody').innerHTML='<div class="empty"><span class="empty-icon">⚠️</span><h4>Bucket no configurado</h4><p>Ve a Supabase → Storage → New Bucket<br>Nombre: <strong>gpga-media</strong> → Public: <strong>ON</strong></p></div>';
-  }
+  }catch(e){document.getElementById('mbody').innerHTML='<div class="empty"><span class="empty-icon">⚠️</span><h4>Bucket no configurado</h4><p>Supabase → Storage → New Bucket<br>Nombre: <strong>gpga-media</strong> → Public: ON</p></div>';}
 }
-
-function copyURL(url){
-  navigator.clipboard.writeText(url).then(()=>toast('URL copiada al portapapeles','inf')).catch(()=>toast('No se pudo copiar','err'));
-}
-
+function copyURL(url){navigator.clipboard.writeText(url).then(()=>toast('URL copiada','inf')).catch(()=>toast('No se pudo copiar','err'));}
 async function uploadFiles(files){
   const prog=document.getElementById('uprog');
   for(const file of Array.from(files)){
     prog.innerHTML='<div class="loading"><span class="spin"></span>Subiendo <strong>'+esc(file.name)+'</strong>…</div>';
     try{
-      const r=await fetch(SBU+'/storage/v1/object/'+BKT+'/'+encodeURIComponent(file.name),{
-        method:'POST',
-        headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':file.type},
-        body:file
-      });
+      const r=await fetch(SBU+'/storage/v1/object/'+BKT+'/'+encodeURIComponent(file.name),{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':file.type},body:file});
       if(!r.ok)throw new Error(await r.text());
       const publicUrl=SBU+'/storage/v1/object/public/'+BKT+'/'+encodeURIComponent(file.name);
       toast(file.name+' subido ✓');
-      // Show URL visibly
-      prog.innerHTML='<div style="margin-top:12px;background:#0a2a0a;border:1px solid #2e7d32;border-radius:8px;padding:14px 16px">'
-        +'<div style="font-size:11px;font-weight:700;color:#4caf50;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">✅ Archivo subido — URL pública:</div>'
-        +'<div style="display:flex;gap:8px;align-items:center">'
-        +'<input id="last-url" readonly value="'+publicUrl+'" style="flex:1;background:#111;border:1px solid #333;border-radius:6px;padding:8px 10px;color:#fff;font-size:11px;font-family:\'DM Mono\',monospace">'
-        +'<button onclick="copyURL(\''+publicUrl+'\');this.textContent=\'✓ Copiada!\';setTimeout(()=>this.textContent=\'📋 Copiar\',2000)" style="background:#2e7d32;color:#fff;border:none;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">📋 Copiar</button>'
-        +'</div>'
-        +'</div>';
+      prog.innerHTML='<div style="margin-top:12px;background:#0a2a0a;border:1px solid #2e7d32;border-radius:8px;padding:14px 16px">'+
+        '<div style="font-size:11px;font-weight:700;color:#4caf50;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">✅ URL pública:</div>'+
+        '<div style="display:flex;gap:8px;align-items:center">'+
+        '<input readonly value="'+publicUrl+'" style="flex:1;background:#111;border:1px solid #333;border-radius:6px;padding:8px 10px;color:#fff;font-size:11px;font-family:\'DM Mono\',monospace">'+
+        '<button onclick="copyURL(\''+publicUrl+'\');this.textContent=\'✓ Copiada!\';setTimeout(()=>this.textContent=\'📋 Copiar\',2000)" style="background:#2e7d32;color:#fff;border:none;border-radius:6px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">📋 Copiar</button>'+
+        '</div></div>';
     }catch(e){toast('Error subiendo '+esc(file.name)+': '+e.message,'err');}
   }
   loadMedia();
 }
-
 async function delMedia(name){
-  if(!confirm('¿Eliminar "'+name+'"? Esta acción no se puede deshacer.'))return;
-  try{
-    await fetch(SBU+'/storage/v1/object/'+BKT+'/'+encodeURIComponent(name),{method:'DELETE',headers:H});
-    toast(name+' eliminado');loadMedia();
-  }catch(e){toast('Error eliminando archivo','err');}
+  if(!confirm('¿Eliminar "'+name+'"?'))return;
+  try{await fetch(SBU+'/storage/v1/object/'+BKT+'/'+encodeURIComponent(name),{method:'DELETE',headers:H});toast(name+' eliminado');loadMedia();}
+  catch(e){toast('Error eliminando','err');}
 }
 
-// ═══════════════════════════════════
+// ═══════════════════════
 // UTILS
-// ═══════════════════════════════════
+// ═══════════════════════
 function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fd(iso){
-  if(!iso)return'—';
-  return new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
-}
-
-// Drag-drop on upload zone
+function fd(iso){if(!iso)return'—';return new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});}
 const uz=document.getElementById('uzone');
-if(uz){
-  uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag');});
-  uz.addEventListener('dragleave',()=>uz.classList.remove('drag'));
-  uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag');uploadFiles(e.dataTransfer.files);});
-}
+if(uz){uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag');});uz.addEventListener('dragleave',()=>uz.classList.remove('drag'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag');uploadFiles(e.dataTransfer.files);});}
 
-// ═══════════════════════════════════
 // INIT
-// ═══════════════════════════════════
 loadDashboard();
 </script>
 </body>
