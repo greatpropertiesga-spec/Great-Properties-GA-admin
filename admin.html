@@ -441,7 +441,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="conn-dot" id="cdot"></div>
       <span class="conn-label" id="ctxt">Conectando…</span>
     </div>
-    <a href="https://greatpropertiesga-greatpropertiesga.zewfmr.easypanel.host" target="_blank" class="btn btn-ghost btn-sm btn-icon" title="Ver sitio">↗</a>
+    <a href="https://greatpropertiesga-greatpropertiesga.zewfmr.easypanel.host" target="_blank" class="btn btn-ghost btn-sm btn-icon" title="Ver sitio web">↗</a>
   </div>
 </nav>
 
@@ -516,6 +516,8 @@ tr:hover td{background:rgba(255,255,255,.018)}
         <div class="stab" onclick="switchTab(this,'st-branding')">🎨 Branding</div>
         <div class="stab" onclick="switchTab(this,'st-homepage')">🏠 Homepage</div>
         <div class="stab" onclick="switchTab(this,'st-about')">ℹ About</div>
+        <div class="stab" onclick="switchTab(this,'st-sell')">💰 Sell Page</div>
+        <div class="stab" onclick="switchTab(this,'st-footer')">🔗 Footer</div>
         <div class="stab" onclick="switchTab(this,'st-seo')">🔍 SEO</div>
       </div>
       <div id="sbody"><div class="loading"><span class="spin"></span>Cargando…</div></div>
@@ -857,13 +859,74 @@ function exportCSV(){
 // SETTINGS
 // ═══════════════════════════════════
 let SC={};
-const SECS=['contact','branding','homepage','about','seo'];
+const SECS=['contact','branding','homepage','about','sell','footer','seo'];
+
+// Default settings seed — ensures all keys exist in Supabase
+const SETTINGS_SEED = [
+  // contact
+  {key:'site_phone',section:'contact',label:'Teléfono',type:'text',value:'404-590-1613'},
+  {key:'site_email',section:'contact',label:'Email',type:'text',value:'info@greatpropertiesga.com'},
+  {key:'site_address',section:'contact',label:'Dirección de oficina',type:'text',value:'Serving all of Georgia'},
+  {key:'site_hours',section:'contact',label:'Horario de atención',type:'text',value:'Mon–Fri 9am–6pm'},
+  // branding
+  {key:'logo_url',section:'branding',label:'Logo URL (imagen)',type:'image_url',value:''},
+  {key:'logo_text',section:'branding',label:'Nombre del sitio',type:'text',value:'Great Properties GA'},
+  {key:'logo_tagline',section:'branding',label:'Tagline bajo el logo',type:'text',value:'Serious About Buying. Serious About Closing.'},
+  {key:'brand_color',section:'branding',label:'Color principal (brand)',type:'color',value:'#c9a84c'},
+  {key:'brand_color_2',section:'branding',label:'Color secundario (fondo)',type:'color',value:'#0a0a0a'},
+  {key:'font_display',section:'branding',label:'Fuente de títulos',type:'text',value:'Cormorant Garamond'},
+  {key:'font_body',section:'branding',label:'Fuente de cuerpo',type:'text',value:'DM Sans'},
+  // homepage
+  {key:'hero_title',section:'homepage',label:'Hero — Título principal',type:'textarea',value:'Georgia Real Estate
+Done Right.'},
+  {key:'hero_subtitle',section:'homepage',label:'Hero — Subtítulo',type:'textarea',value:'We buy, renovate, and sell exceptional properties across all of Georgia.'},
+  {key:'hero_image_url',section:'homepage',label:'Hero — Imagen de fondo URL',type:'image_url',value:''},
+  {key:'hero_cta_text',section:'homepage',label:'Hero — Texto del botón CTA',type:'text',value:'Get My Cash Offer'},
+  {key:'hero_cta_url',section:'homepage',label:'Hero — URL del botón CTA',type:'text',value:'sell.html'},
+  {key:'section_hero',section:'homepage',label:'Mostrar sección Hero',type:'text',value:'true'},
+  {key:'section_how_it_works',section:'homepage',label:'Mostrar sección How It Works',type:'text',value:'true'},
+  {key:'section_properties',section:'homepage',label:'Mostrar sección Properties',type:'text',value:'true'},
+  {key:'section_testimonials',section:'homepage',label:'Mostrar sección Testimonios',type:'text',value:'true'},
+  {key:'section_about_band',section:'homepage',label:'Mostrar banda About',type:'text',value:'true'},
+  // about
+  {key:'about_title',section:'about',label:'About — Título de la página',type:'text',value:'About Great Properties GA'},
+  {key:'about_subtitle',section:'about',label:'About — Subtítulo',type:'textarea',value:'Georgia's trusted real estate investment company.'},
+  {key:'about_story',section:'about',label:'About — Historia / texto principal',type:'textarea',value:''},
+  {key:'about_image_url',section:'about',label:'About — Imagen del equipo URL',type:'image_url',value:''},
+  // sell
+  {key:'sell_title',section:'sell',label:'Sell Page — Título',type:'text',value:'Sell Your Home Fast'},
+  {key:'sell_subtitle',section:'sell',label:'Sell Page — Subtítulo',type:'textarea',value:'We buy houses in any condition across Georgia. Get a cash offer in 24 hours.'},
+  {key:'sell_form_title',section:'sell',label:'Sell Page — Título del formulario',type:'text',value:'Get Your Cash Offer'},
+  {key:'sell_steps_title',section:'sell',label:'Sell Page — Título de los pasos',type:'text',value:'How It Works'},
+  // footer
+  {key:'footer_text',section:'footer',label:'Footer — Descripción de la empresa',type:'textarea',value:'Georgia's trusted real estate investment company. We buy, renovate, and sell properties across all of Georgia.'},
+  {key:'footer_slogan',section:'footer',label:'Footer — Slogan',type:'text',value:'Serious About Buying. Serious About Closing.'},
+  {key:'footer_facebook',section:'footer',label:'Footer — Facebook URL',type:'text',value:''},
+  {key:'footer_instagram',section:'footer',label:'Footer — Instagram URL',type:'text',value:''},
+  // seo
+  {key:'meta_title',section:'seo',label:'SEO — Meta Title',type:'text',value:'Great Properties GA, LLC — Georgia Real Estate'},
+  {key:'meta_description',section:'seo',label:'SEO — Meta Description',type:'textarea',value:'Great Properties GA buys houses fast across Georgia. Cash offers within 24 hours.'},
+  {key:'og_image_url',section:'seo',label:'SEO — OG Image URL',type:'image_url',value:''},
+];
 
 async function loadSettings(){
   try{
     const rows=await GET('site_settings','order=section.asc,key.asc');
     SC={};rows.forEach(r=>SC[r.key]=r);
-    renderSettings(rows);
+    // Merge seed: add any keys that are missing from DB (display-only, not auto-saved)
+    SETTINGS_SEED.forEach(function(seed){
+      if(!SC[seed.key]){
+        SC[seed.key]={...seed,id:null};
+      } else {
+        // Fill in label/type/section from seed if missing in DB
+        if(!SC[seed.key].label)SC[seed.key].label=seed.label;
+        if(!SC[seed.key].type)SC[seed.key].type=seed.type;
+        if(!SC[seed.key].section)SC[seed.key].section=seed.section;
+      }
+    });
+    // Build rows from merged SC
+    const merged=SETTINGS_SEED.map(s=>SC[s.key]).filter(Boolean);
+    renderSettings(merged);
   }catch(e){toast('Error cargando settings','err');}
 }
 
@@ -889,7 +952,7 @@ function renderSettings(rows){
   // Attach live listeners
   const ce=document.getElementById('setting-brand_color');
   if(ce){ce.addEventListener('input',updPrev);updPrev();}
-  ['setting-logo_text','setting-hero_title'].forEach(id=>{
+  ['setting-logo_text','setting-logo_url','setting-logo_tagline','setting-hero_title','setting-hero_cta_text'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.addEventListener('input',updPrev);
   });
 }
@@ -925,7 +988,10 @@ function renderPreview(){
         <span style="color:var(--brand)">📞 404-590-1613</span>
       </div>
       <div class="ms-header">
-        <span class="ms-logo-icon">🦅</span>
+        <div id="pv-logo-wrap" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center">
+          <img id="pv-logo-img" src="" alt="Logo" style="max-height:36px;max-width:80px;object-fit:contain;display:none">
+          <span id="pv-logo-emoji" style="font-size:22px;line-height:1">🦅</span>
+        </div>
         <div>
           <div class="ms-logo-name" id="pv-logoname">Great Properties GA, LLC</div>
           <div class="ms-logo-tag" id="pv-logotag" style="color:#c0392b">SERIOUS ABOUT BUYING. SERIOUS ABOUT CLOSING.</div>
@@ -975,10 +1041,32 @@ function updPrev(){
   const lt=document.getElementById('setting-logo_text');
   const pn=document.getElementById('pv-logoname');
   if(lt&&pn)pn.textContent=lt.value||'Great Properties GA, LLC';
+  // Logo tagline
+  const tl=document.getElementById('setting-logo_tagline');
+  const ptg=document.getElementById('pv-logotag');
+  if(tl&&ptg)ptg.textContent=(tl.value||'SERIOUS ABOUT BUYING. SERIOUS ABOUT CLOSING.').toUpperCase();
+  // Logo image preview
+  const lu=document.getElementById('setting-logo_url');
+  const pli=document.getElementById('pv-logo-img');
+  const ple=document.getElementById('pv-logo-emoji');
+  if(lu&&pli){
+    if(lu.value.trim()){
+      pli.src=lu.value.trim();
+      pli.style.display='block';
+      if(ple)ple.style.display='none';
+    } else {
+      pli.style.display='none';
+      if(ple)ple.style.display='';
+    }
+  }
   // Hero title
   const ht=document.getElementById('setting-hero_title');
   const ph=document.getElementById('pv-hero');
   if(ht&&ph)ph.innerHTML=(ht.value||'Need to sell your home quickly?<br>We can help!').replace(/\n/g,'<br>');
+  // Hero CTA
+  const ct=document.getElementById('setting-hero_cta_text');
+  const pct=document.getElementById('pv-cta');
+  if(ct&&pct)pct.textContent=(ct.value||'Get My Cash Offer →');
 }
 
 function hexToRgb(hex){
