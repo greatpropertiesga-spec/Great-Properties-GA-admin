@@ -216,6 +216,11 @@ tr:hover td{background:#f8fafc}
   <div class="s-foot">
     <div class="conn"><div class="conn-dot" id="cdot"></div><span class="conn-label" id="ctxt">…</span></div>
     <a href="https://greatpropertiesga.com" target="_blank" class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff;font-size:11px">Ver Sitio ↗</a>
+    <div style="margin-top:10px;display:flex;gap:12px;justify-content:center">
+      <a href="https://greatpropertiesga.com/privacy.html" target="_blank" style="font-size:10px;color:rgba(255,255,255,.35)">Privacy</a>
+      <span style="font-size:10px;color:rgba(255,255,255,.2)">·</span>
+      <a href="https://greatpropertiesga.com/terms.html" target="_blank" style="font-size:10px;color:rgba(255,255,255,.35)">Terms</a>
+    </div>
   </div>
 </nav>
 
@@ -315,7 +320,174 @@ tr:hover td{background:#f8fafc}
       </div>
 
       <div class="card">
-        <div class="card-head"><h3>🎬 Video del Hero (Homepage)</h3></div>
+        <div class="card-head"><h3>🎨 Branding & Tema</h3></div>
+        <div class="card-body">
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">Color Principal</div>
+              <div class="sr-key">brand_color</div>
+              <div class="sr-desc">Color del nav, botones, links y acentos</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input type="color" id="setting-brand_color" data-cssvar="--brand" value="#c9a84c"
+                style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px"
+                oninput="document.documentElement.style.setProperty('--brand',this.value)">
+              <input type="text" id="setting-brand_color_hex"
+                placeholder="#c9a84c"
+                style="width:100px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--text)"
+                oninput="document.getElementById('setting-brand_color').value=this.value;document.documentElement.style.setProperty('--brand',this.value)">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncColorHex('brand_color');saveSetting('brand_color')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">Color Secundario</div>
+              <div class="sr-key">brand_color_2</div>
+              <div class="sr-desc">Color de fondo oscuro y elementos secundarios</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input type="color" id="setting-brand_color_2" data-cssvar="--brand2" value="#0a0a0a"
+                style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px"
+                oninput="document.documentElement.style.setProperty('--brand2',this.value)">
+              <input type="text" id="setting-brand_color_2_hex"
+                placeholder="#0a0a0a"
+                style="width:100px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--text)"
+                oninput="document.getElementById('setting-brand_color_2').value=this.value;document.documentElement.style.setProperty('--brand2',this.value)">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncColorHex('brand_color_2');saveSetting('brand_color_2')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">Fuente de Títulos</div>
+              <div class="sr-key">font_display</div>
+              <div class="sr-desc">Fuente para H1, H2, H3 y el logo</div>
+            </div>
+            <div>
+              <select id="setting-font_display"
+                style="width:100%;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text)">
+                <option value="Cormorant Garamond">Cormorant Garamond — Lujo editorial</option>
+                <option value="Playfair Display">Playfair Display — Elegante clásico</option>
+                <option value="EB Garamond">EB Garamond — Refinado sobrio</option>
+                <option value="Libre Baskerville">Libre Baskerville — Serio profesional</option>
+              </select>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('font_display')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">Fuente de Cuerpo</div>
+              <div class="sr-key">font_body</div>
+              <div class="sr-desc">Fuente para párrafos, nav, botones y formularios</div>
+            </div>
+            <div>
+              <select id="setting-font_body"
+                style="width:100%;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text)">
+                <option value="DM Sans">DM Sans — Moderno limpio</option>
+                <option value="Outfit">Outfit — Geométrico moderno</option>
+                <option value="Jost">Jost — Minimalista europeo</option>
+                <option value="Raleway">Raleway — Elegante sans</option>
+              </select>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('font_body')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">Logo / Nombre del Sitio</div>
+              <div class="sr-key">logo_text</div>
+            </div>
+            <div><input type="text" id="setting-logo_text" placeholder="Great Properties GA"
+              style="width:100%;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text)"></div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('logo_text')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div>
+              <div class="sr-name">URL del Logo</div>
+              <div class="sr-key">logo_url</div>
+              <div class="sr-desc">Sube el logo en Media y pega la URL aquí</div>
+            </div>
+            <div><input type="url" id="setting-logo_url" placeholder="https://...supabase.co/storage/.../logo.png"
+              style="width:100%;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text)"></div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('logo_url')">Guardar</button></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>👁 Visibilidad de Secciones</h3></div>
+        <div class="card-body">
+          <p style="font-size:13px;color:var(--text-2);margin-bottom:16px">Activa o desactiva secciones del homepage. Los cambios se reflejan al recargar el sitio.</p>
+
+          <div class="srow" style="align-items:center">
+            <div><div class="sr-name">Hero Principal</div><div class="sr-key">section_hero</div></div>
+            <div>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text)">
+                <input type="checkbox" id="setting-section_hero" checked
+                  style="width:18px;height:18px;cursor:pointer;accent-color:var(--brand)">
+                Mostrar sección Hero
+              </label>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('section_hero')">Guardar</button></div>
+          </div>
+
+          <div class="srow" style="align-items:center">
+            <div><div class="sr-name">Cómo Funciona</div><div class="sr-key">section_how_it_works</div></div>
+            <div>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text)">
+                <input type="checkbox" id="setting-section_how_it_works" checked
+                  style="width:18px;height:18px;cursor:pointer;accent-color:var(--brand)">
+                Mostrar sección "How It Works"
+              </label>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('section_how_it_works')">Guardar</button></div>
+          </div>
+
+          <div class="srow" style="align-items:center">
+            <div><div class="sr-name">Propiedades en Home</div><div class="sr-key">section_properties</div></div>
+            <div>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text)">
+                <input type="checkbox" id="setting-section_properties" checked
+                  style="width:18px;height:18px;cursor:pointer;accent-color:var(--brand)">
+                Mostrar grid de propiedades
+              </label>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('section_properties')">Guardar</button></div>
+          </div>
+
+          <div class="srow" style="align-items:center">
+            <div><div class="sr-name">Testimonios</div><div class="sr-key">section_testimonials</div></div>
+            <div>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text)">
+                <input type="checkbox" id="setting-section_testimonials" checked
+                  style="width:18px;height:18px;cursor:pointer;accent-color:var(--brand)">
+                Mostrar sección de testimonios
+              </label>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('section_testimonials')">Guardar</button></div>
+          </div>
+
+          <div class="srow" style="align-items:center">
+            <div><div class="sr-name">Banda de Estadísticas</div><div class="sr-key">section_about_band</div></div>
+            <div>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--text)">
+                <input type="checkbox" id="setting-section_about_band" checked
+                  style="width:18px;height:18px;cursor:pointer;accent-color:var(--brand)">
+                Mostrar banda 24hr / 7day / 0% / All Georgia
+              </label>
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="saveSetting('section_about_band')">Guardar</button></div>
+          </div>
+
+        </div>
+      </div>
+
+
         <div class="card-body">
           <div class="srow">
             <div><div class="sr-name">URL del Video</div><div class="sr-key">hero_video_url</div><div class="sr-desc">Pega el link de YouTube, Vimeo, o URL directa de MP4</div></div>
@@ -821,25 +993,55 @@ if (uz) {
 // ═══════════════════════════════════════════════
 // SETTINGS
 // ═══════════════════════════════════════════════
-const SETTING_KEYS = ['hero_video_url', 'hero_image_url', 'site_phone', 'site_email', 'hero_title'];
+const SETTING_KEYS = ['hero_video_url', 'hero_image_url', 'site_phone', 'site_email', 'hero_title',
+  'brand_color', 'brand_color_2', 'font_display', 'font_body',
+  'section_hero', 'section_how_it_works', 'section_properties', 'section_testimonials', 'section_about_band'];
 
-async function loadSettingsFields() {
+async async function loadSettingsFields() {
   try {
     const rows = await GET('site_settings', 'select=key,value');
     rows.forEach(row => {
       const el = document.getElementById('setting-' + row.key);
-      if (el && row.value) el.value = row.value;
+      if (!el || row.value === null || row.value === '') return;
+      if (el.type === 'checkbox') {
+        el.checked = row.value === 'true';
+      } else {
+        el.value = row.value;
+      }
+      // Live preview for color fields
+      if (el.type === 'color') {
+        document.documentElement.style.setProperty(
+          el.dataset.cssvar || '--brand', row.value
+        );
+      }
     });
   } catch (e) { toast('Error cargando settings', 'err'); }
+}
+
+// Sync color picker ↔ hex text input
+function syncColorHex(key) {
+  const picker = document.getElementById('setting-' + key);
+  const hex    = document.getElementById('setting-' + key + '_hex');
+  if (picker && hex) {
+    // whichever was last edited, sync the other
+    if (document.activeElement === hex) {
+      picker.value = hex.value;
+    } else {
+      if (hex) hex.value = picker.value;
+    }
+    // Also write to setting-brand_color so saveSettings() picks it up
+    picker.value = picker.value; // normalize
+  }
 }
 
 async function saveSetting(key) {
   const el = document.getElementById('setting-' + key);
   if (!el) return;
-  const value = el.value.trim();
+  const value = el.type === 'checkbox' ? String(el.checked) : el.value.trim();
   try {
     await UPSERT('site_settings', { key, value, section: 'site', label: key, type: 'text', updated_at: new Date().toISOString() }, 'key');
-    // Clear visitor cache
+    // Clear visitor localStorage cache so site picks up change immediately
+    try { localStorage.removeItem('gpga_theme_v2'); localStorage.removeItem('gpga_theme_v3'); } catch(e) {}
     toast('"' + key + '" guardado ✓ — recarga el sitio para ver el cambio');
   } catch (e) { toast('Error: ' + e.message, 'err'); }
 }
