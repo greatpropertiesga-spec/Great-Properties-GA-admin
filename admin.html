@@ -664,9 +664,14 @@ async function CNT(t, p) {
 // ═══════════════════════════════════════════════
 const VIEWS = { dashboard: 'Dashboard', properties: 'Properties', leads: 'Leads', media: 'Media / Fotos', settings: 'Configuración' };
 
-document.querySelectorAll('.s-item').forEach(b => {
-  b.addEventListener('click', () => {
-    const v = b.dataset.view;
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  // Wire up sidebar nav clicks
+  document.querySelectorAll('.s-item').forEach(b => {
+    b.addEventListener('click', () => {
+      const v = b.dataset.view;
     document.querySelectorAll('.s-item').forEach(x => x.classList.remove('on'));
     b.classList.add('on');
     document.querySelectorAll('.view').forEach(el => el.classList.remove('on'));
@@ -680,7 +685,6 @@ document.querySelectorAll('.s-item').forEach(b => {
 });
 
 function goTo(v) { document.querySelector('.s-item[data-view="' + v + '"]').click(); }
-document.getElementById('tb-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
 // ═══════════════════════════════════════════════
 // TOAST
@@ -997,7 +1001,7 @@ const SETTING_KEYS = ['hero_video_url', 'hero_image_url', 'site_phone', 'site_em
   'brand_color', 'brand_color_2', 'font_display', 'font_body',
   'section_hero', 'section_how_it_works', 'section_properties', 'section_testimonials', 'section_about_band'];
 
-async async function loadSettingsFields() {
+async function loadSettingsFields() {
   try {
     const rows = await GET('site_settings', 'select=key,value');
     rows.forEach(row => {
@@ -1070,6 +1074,9 @@ function fd(iso) { if (!iso) return '—'; return new Date(iso).toLocaleString('
 // INIT
 // ═══════════════════════════════════════════════
 loadDashboard();
+  document.getElementById('tb-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
