@@ -684,6 +684,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+  loadDashboard();
+  document.getElementById('tb-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+});
 function goTo(v) { document.querySelector('.s-item[data-view="' + v + '"]').click(); }
 
 // ═══════════════════════════════════════════════
@@ -1076,7 +1079,7 @@ function fd(iso) { if (!iso) return '—'; return new Date(iso).toLocaleString('
 loadDashboard();
   document.getElementById('tb-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
-}); // end DOMContentLoaded
+ DOMContentLoaded
 </script>
 </body>
 </html>
