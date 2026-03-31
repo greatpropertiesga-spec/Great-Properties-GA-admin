@@ -617,6 +617,102 @@ tr:hover td{background:#f8fafc}
         </div>
       </div>
 
+
+      <!-- ══ CTA & COLORES ══ -->
+      <div class="card">
+        <div class="card-head">
+          <h3>🎯 Botones &amp; CTAs</h3>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span style="font-size:11px;color:var(--text-3)">Preview:</span>
+            <button id="cta-preview-btn" style="padding:8px 18px;border-radius:6px;border:none;font-size:13px;font-weight:700;cursor:default;background:#1a3a5c;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2);transition:all .2s">Botón CTA</button>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <!-- PRESETS -->
+          <div style="margin-bottom:20px;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:12px">⚡ Presets Rápidos — haz clic para aplicar</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-sm" onclick="applyPreset('navy')"   style="background:#1a3a5c;color:#fff;border:none">🔵 Navy (Original)</button>
+              <button class="btn btn-sm" onclick="applyPreset('orange')" style="background:#f97316;color:#fff;border:none">🔥 Naranja</button>
+              <button class="btn btn-sm" onclick="applyPreset('red')"    style="background:#dc2626;color:#fff;border:none">🔴 Rojo</button>
+              <button class="btn btn-sm" onclick="applyPreset('green')"  style="background:#16a34a;color:#fff;border:none">🟢 Verde</button>
+              <button class="btn btn-sm" onclick="applyPreset('purple')" style="background:#7c3aed;color:#fff;border:none">🟣 Morado</button>
+              <button class="btn btn-sm" onclick="applyPreset('gold')"   style="background:#b7860a;color:#fff;border:none">✨ Dorado</button>
+              <button class="btn btn-sm" onclick="applyPreset('teal')"   style="background:#0d9488;color:#fff;border:none">🩵 Teal</button>
+            </div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Color de Botones CTA</div><div class="sr-key">cta_color</div><div class="sr-desc">Todos los botones principales: "Get Cash Offer", "Submit", etc.</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-cta_color" value="#1a3a5c" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="syncCtaPreview('cta_color',this.value);document.getElementById('setting-cta_color_hex').value=this.value">
+              <input type="text"  id="setting-cta_color_hex" placeholder="#1a3a5c" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_color').value=this.value;syncCtaPreview('cta_color',this.value)">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_color')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Color Gradiente / Hover</div><div class="sr-key">cta_color_2</div><div class="sr-desc">Color secundario del gradiente y hover. Vacío = se calcula automático</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-cta_color_2" value="#0f2340" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-cta_color_2_hex').value=this.value">
+              <input type="text"  id="setting-cta_color_2_hex" placeholder="Auto" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_color_2').value=this.value">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_color_2')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Texto de Botones</div><div class="sr-key">cta_text_color</div><div class="sr-desc">Color del texto dentro de los botones CTA</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-cta_text_color" value="#ffffff" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="syncCtaPreview('cta_text_color',this.value);document.getElementById('setting-cta_text_color_hex').value=this.value">
+              <input type="text"  id="setting-cta_text_color_hex" placeholder="#ffffff" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_text_color').value=this.value;syncCtaPreview('cta_text_color',this.value)">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_text_color')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Banda CTA (antes del footer)</div><div class="sr-key">cta_band_color</div><div class="sr-desc">La franja de color "Ready to Sell?" que aparece en todas las páginas</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-cta_band_color" value="#1a3a5c" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-cta_band_color_hex').value=this.value">
+              <input type="text"  id="setting-cta_band_color_hex" placeholder="Igual al CTA" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_band_color').value=this.value">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_band_color')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Teléfono en Barra Superior</div><div class="sr-key">topbar_phone_bg</div><div class="sr-desc">Fondo del botón 📞 en el topbar</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-topbar_phone_bg" value="#1a3a5c" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-topbar_phone_bg_hex').value=this.value">
+              <input type="text"  id="setting-topbar_phone_bg_hex" placeholder="Igual al CTA" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-topbar_phone_bg').value=this.value">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('topbar_phone_bg')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Punto "En Línea" del Teléfono</div><div class="sr-key">phone_dot_color</div><div class="sr-desc">El puntito pulsante junto al número de teléfono</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-phone_dot_color" value="#4ade80" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-phone_dot_color_hex').value=this.value">
+              <input type="text"  id="setting-phone_dot_color_hex" placeholder="#4ade80" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-phone_dot_color').value=this.value">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('phone_dot_color')">Guardar</button></div>
+          </div>
+
+          <div class="srow">
+            <div><div class="sr-name">Fondo de Páginas Internas</div><div class="sr-key">hero_bg_color</div><div class="sr-desc">Banner superior en About, Sell, FAQs, Contact, etc.</div></div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="color" id="setting-hero_bg_color" value="#1a3a5c" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-hero_bg_color_hex').value=this.value">
+              <input type="text"  id="setting-hero_bg_color_hex" placeholder="Igual al Brand" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-hero_bg_color').value=this.value">
+            </div>
+            <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('hero_bg_color')">Guardar</button></div>
+          </div>
+
+          <div style="padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px">
+            <button class="btn btn-ghost" onclick="loadSettingsFields()">🔄 Recargar</button>
+            <button class="btn btn-primary" onclick="saveAllCTA()">💾 Guardar Todo los CTAs</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div><!-- /content -->
@@ -1096,7 +1192,8 @@ if (uz) {
 // ═══════════════════════════════════════════════
 const SETTING_KEYS = ['hero_video_url', 'hero_image_url', 'site_phone', 'site_email', 'hero_title',
   'brand_color', 'brand_color_2', 'font_display', 'font_body',
-  'section_hero', 'section_how_it_works', 'section_properties', 'section_testimonials', 'section_about_band'];
+  'section_hero', 'section_how_it_works', 'section_properties', 'section_testimonials', 'section_about_band',
+  'cta_color', 'cta_color_2', 'cta_text_color', 'cta_band_color', 'topbar_phone_bg', 'phone_dot_color', 'hero_bg_color'];
 
 async function loadSettingsFields() {
   try {
@@ -1109,13 +1206,17 @@ async function loadSettingsFields() {
       } else {
         el.value = row.value;
       }
+      // Sync hex text inputs for color pickers
+      const hexEl = document.getElementById('setting-' + row.key + '_hex');
+      if (hexEl && el.type === 'color') hexEl.value = row.value;
       // Live preview for color fields
-      if (el.type === 'color') {
-        document.documentElement.style.setProperty(
-          el.dataset.cssvar || '--brand', row.value
-        );
+      if (el.type === 'color' && el.dataset.cssvar) {
+        document.documentElement.style.setProperty(el.dataset.cssvar, row.value);
       }
     });
+    // Update CTA preview button
+    const ctaEl = document.getElementById('setting-cta_color');
+    if (ctaEl) syncCtaPreview('cta_color', ctaEl.value);
   } catch (e) { toast('Error cargando settings', 'err'); }
 }
 
@@ -1158,6 +1259,85 @@ async function saveSettings() {
     } catch (e) {}
   }
   toast(ok + ' configuraciones guardadas ✓');
+}
+
+
+// ═══════════════════════════════════════════════
+// CTA COLOR HELPERS
+// ═══════════════════════════════════════════════
+const CTA_PRESETS = {
+  navy:   { cta_color:'#1a3a5c', cta_color_2:'#0f2340', cta_text_color:'#ffffff', cta_band_color:'#1a3a5c', topbar_phone_bg:'#1a3a5c', phone_dot_color:'#4ade80' },
+  orange: { cta_color:'#f97316', cta_color_2:'#ea580c', cta_text_color:'#ffffff', cta_band_color:'#f97316', topbar_phone_bg:'#f97316', phone_dot_color:'#4ade80' },
+  red:    { cta_color:'#dc2626', cta_color_2:'#b91c1c', cta_text_color:'#ffffff', cta_band_color:'#dc2626', topbar_phone_bg:'#dc2626', phone_dot_color:'#4ade80' },
+  green:  { cta_color:'#16a34a', cta_color_2:'#15803d', cta_text_color:'#ffffff', cta_band_color:'#16a34a', topbar_phone_bg:'#16a34a', phone_dot_color:'#fbbf24' },
+  purple: { cta_color:'#7c3aed', cta_color_2:'#6d28d9', cta_text_color:'#ffffff', cta_band_color:'#7c3aed', topbar_phone_bg:'#7c3aed', phone_dot_color:'#4ade80' },
+  gold:   { cta_color:'#b7860a', cta_color_2:'#92680a', cta_text_color:'#ffffff', cta_band_color:'#b7860a', topbar_phone_bg:'#b7860a', phone_dot_color:'#4ade80' },
+  teal:   { cta_color:'#0d9488', cta_color_2:'#0f766e', cta_text_color:'#ffffff', cta_band_color:'#0d9488', topbar_phone_bg:'#0d9488', phone_dot_color:'#fbbf24' },
+};
+
+function syncCtaPreview(key, value) {
+  const btn = document.getElementById('cta-preview-btn');
+  if (!btn) return;
+  const color = document.getElementById('setting-cta_color')?.value || '#1a3a5c';
+  const color2 = document.getElementById('setting-cta_color_2')?.value || '';
+  const textColor = document.getElementById('setting-cta_text_color')?.value || '#ffffff';
+  btn.style.background = color2 ? `linear-gradient(135deg,${color},${color2})` : color;
+  btn.style.color = textColor;
+  btn.style.boxShadow = `0 4px 14px ${color}55`;
+}
+
+function syncCtaAndSave(key) {
+  const picker = document.getElementById('setting-' + key);
+  const hexEl  = document.getElementById('setting-' + key + '_hex');
+  if (picker && hexEl) {
+    // sync whichever was last touched
+    if (hexEl.value && hexEl.value.startsWith('#')) picker.value = hexEl.value;
+    else hexEl.value = picker.value;
+  }
+  saveSetting(key);
+}
+
+async function applyPreset(name) {
+  const preset = CTA_PRESETS[name];
+  if (!preset) return;
+  // Set all UI fields
+  for (const [key, val] of Object.entries(preset)) {
+    const picker = document.getElementById('setting-' + key);
+    const hexEl  = document.getElementById('setting-' + key + '_hex');
+    if (picker) picker.value = val;
+    if (hexEl)  hexEl.value  = val;
+  }
+  syncCtaPreview();
+  // Save all to Supabase
+  let ok = 0;
+  for (const key of Object.keys(preset)) {
+    const el = document.getElementById('setting-' + key);
+    if (!el) continue;
+    try {
+      await UPSERT('site_settings', { key, value: el.value, section: 'cta', label: key, type: 'color', updated_at: new Date().toISOString() }, 'key');
+      ok++;
+    } catch(e) {}
+  }
+  try { localStorage.removeItem('gpga_theme_v3'); } catch(e) {}
+  toast(`✅ Preset "${name}" aplicado (${ok} valores guardados) — recarga el sitio`);
+}
+
+async function saveAllCTA() {
+  const ctaKeys = ['cta_color','cta_color_2','cta_text_color','cta_band_color','topbar_phone_bg','phone_dot_color','hero_bg_color'];
+  let ok = 0;
+  for (const key of ctaKeys) {
+    // Prefer hex input if available
+    const hexEl  = document.getElementById('setting-' + key + '_hex');
+    const picker = document.getElementById('setting-' + key);
+    const value  = (hexEl && hexEl.value.startsWith('#')) ? hexEl.value : (picker ? picker.value : '');
+    if (!value) continue;
+    try {
+      await UPSERT('site_settings', { key, value, section: 'cta', label: key, type: 'color', updated_at: new Date().toISOString() }, 'key');
+      ok++;
+    } catch(e) {}
+  }
+  try { localStorage.removeItem('gpga_theme_v3'); } catch(e) {}
+  toast(`✅ ${ok} configuraciones CTA guardadas — recarga el sitio para ver los cambios`);
 }
 
 // ═══════════════════════════════════════════════
