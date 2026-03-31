@@ -19,7 +19,7 @@ html,body{height:100%;overflow:hidden}
 body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;-webkit-font-smoothing:antialiased;line-height:1.5}
 
 /* ── SHELL ── */
-.shell{display:flex;height:100vh}
+.shell{display:flex;height:100vh;height:100dvh}
 
 /* ── SIDEBAR ── */
 .sidebar{width:var(--sw);flex-shrink:0;background:var(--brand);display:flex;flex-direction:column;overflow:hidden}
@@ -183,6 +183,24 @@ tr:hover td{background:#f8fafc}
 ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.2)}
 
+/* ── DASHBOARD GRID ── */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* ── MOBILE MENU BUTTON ── */
+.mob-menu-btn{
+  display:none;background:none;border:none;font-size:22px;
+  cursor:pointer;color:var(--text);padding:4px 10px 4px 0;
+  line-height:1;flex-shrink:0;
+}
+
+/* ── MOBILE BACKDROP ── */
+.mob-backdrop{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.5);z-index:149;
+}
+.mob-backdrop.open{display:block}
+
+/* ── TABLET (860px) ── */
 @media(max-width:860px){
   .sidebar{width:52px}
   .s-logo-sub,.s-section,.s-item span,.s-badge,.conn-label{display:none}
@@ -191,10 +209,85 @@ tr:hover td{background:#f8fafc}
   .fgrid{grid-template-columns:1fr}
   .srow{grid-template-columns:1fr}
   .content{padding:14px}
+  .dash-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ── MOBILE (600px) ── */
+@media(max-width:600px){
+  .mob-menu-btn{display:block}
+
+  /* Sidebar becomes overlay */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;
+    width:240px !important;
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    z-index:150;
+    box-shadow:4px 0 24px rgba(0,0,0,.3);
+  }
+  .sidebar.mob-open{
+    transform:translateX(0);
+  }
+  /* Show all sidebar labels when open on mobile */
+  .sidebar.mob-open .s-logo-sub,
+  .sidebar.mob-open .s-section,
+  .sidebar.mob-open .s-item span,
+  .sidebar.mob-open .s-badge,
+  .sidebar.mob-open .conn-label{display:block !important}
+  .sidebar.mob-open .s-item{justify-content:flex-start;padding:9px 10px}
+
+  /* Main takes full width */
+  .main{width:100%}
+
+  /* Stats 1 column on small phones */
+  .stats{grid-template-columns:1fr 1fr}
+
+  /* Dashboard cards stack */
+  .dash-grid{grid-template-columns:1fr}
+
+  /* Topbar adjustments */
+  .topbar{padding:0 12px}
+  .tb-right{gap:6px}
+  #tb-date{display:none}
+
+  /* Content padding */
+  .content{padding:12px}
+
+  /* Modals full screen on mobile */
+  .overlay{padding:0;align-items:flex-end}
+  .modal{
+    max-width:100% !important;
+    max-height:92dvh;
+    border-radius:16px 16px 0 0;
+  }
+
+  /* Settings rows stack */
+  .srow{grid-template-columns:1fr;gap:8px}
+
+  /* Page header stack */
+  .ph{flex-direction:column;align-items:flex-start}
+  .ph-r{flex-wrap:wrap}
+
+  /* Stat values smaller */
+  .stat-val{font-size:22px}
+
+  /* Card head wraps */
+  .card-head{flex-wrap:wrap;gap:8px}
+
+  /* Table min width for scrolling */
+  table{min-width:500px}
+}
+
+/* ── VERY SMALL (400px) ── */
+@media(max-width:400px){
+  .stats{grid-template-columns:1fr}
+  .topbar{gap:6px}
+  .tb-title{font-size:14px}
 }
 </style>
 </head>
 <body>
+<div class="mob-backdrop" id="mob-backdrop"></div>
 <div class="shell">
 
 <!-- ── SIDEBAR ── -->
@@ -227,6 +320,7 @@ tr:hover td{background:#f8fafc}
 <!-- ── MAIN ── -->
 <div class="main">
   <div class="topbar">
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">☰</button>
     <div class="tb-title" id="ptitle">Dashboard</div>
     <div class="tb-right">
       <span style="font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace" id="tb-date"></span>
@@ -245,7 +339,7 @@ tr:hover td{background:#f8fafc}
         <div class="stat" style="border-top-color:var(--red)"><div class="stat-label">Leads Nuevos</div><div class="stat-val" id="sv-n">—</div><div class="stat-note">sin contactar</div></div>
         <div class="stat" style="border-top-color:var(--green)"><div class="stat-label">Disponibles</div><div class="stat-val" id="sv-a">—</div><div class="stat-note">propiedades activas</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="dash-grid">
         <div class="card">
           <div class="card-head"><h3>🔥 Últimos Leads</h3><button class="btn btn-ghost btn-sm" onclick="goTo('leads')">Ver todos</button></div>
           <div id="d-leads"><div class="loading"><span class="spin"></span>Cargando…</div></div>
@@ -1080,6 +1174,38 @@ loadDashboard();
   document.getElementById('tb-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
  DOMContentLoaded
+// ─── MOBILE SIDEBAR TOGGLE ───────────────────
+(function(){
+  var btn = document.getElementById('mob-menu-btn');
+  var sidebar = document.querySelector('.sidebar');
+  var backdrop = document.getElementById('mob-backdrop');
+  if(!btn || !sidebar || !backdrop) return;
+
+  function openSidebar(){
+    sidebar.classList.add('mob-open');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar(){
+    sidebar.classList.remove('mob-open');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    sidebar.classList.contains('mob-open') ? closeSidebar() : openSidebar();
+  });
+  backdrop.addEventListener('click', closeSidebar);
+
+  // Close when nav item is clicked on mobile
+  document.querySelectorAll('.s-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      if(window.innerWidth <= 600) closeSidebar();
+    });
+  });
+})();
+
 </script>
 </body>
 </html>
