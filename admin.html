@@ -633,7 +633,7 @@ tr:hover td{background:#f8fafc}
           <div style="margin-bottom:20px;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px">
             <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-3);margin-bottom:12px">⚡ Presets Rápidos — haz clic para aplicar</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="btn btn-sm" onclick="applyPreset('p180')"   style="background:#1a3a5c;color:#fff;border:none;border:2px solid #c0392b">🔷 Properties180</button>
+              <button class="btn btn-sm" onclick="applyPreset('p180')"   style="background:#1a3a5c;color:#fff;border:2px solid #c0392b;border-radius:6px">✅ Azul Navy + Rojo (Original)</button>
               <button class="btn btn-sm" onclick="applyPreset('navy')"   style="background:#1a3a5c;color:#fff;border:none">🔵 Navy</button>
               <button class="btn btn-sm" onclick="applyPreset('orange')" style="background:#f97316;color:#fff;border:none">🔥 Naranja</button>
               <button class="btn btn-sm" onclick="applyPreset('red')"    style="background:#dc2626;color:#fff;border:none">🔴 Rojo</button>
@@ -1332,7 +1332,8 @@ async function applyPreset(name) {
     localStorage.removeItem('gpga_theme_v2');
     localStorage.removeItem('gpga_theme');
   } catch(e) {}
-  toast('✅ Preset "' + name + '" aplicado (' + ok + ' valores) — recarga el sitio para ver el cambio');
+  const labels = {p180:'Azul Navy + Rojo',navy:'Navy',orange:'Naranja',red:'Rojo',green:'Verde',purple:'Morado',gold:'Dorado',teal:'Teal'};
+  toast('✅ Preset "' + (labels[name]||name) + '" aplicado (' + ok + ' valores) — recarga el sitio para ver el cambio');
 }
 
 async function saveAllCTA() {
