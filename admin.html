@@ -624,7 +624,7 @@ tr:hover td{background:#f8fafc}
           <h3>🎯 Botones &amp; CTAs</h3>
           <div style="display:flex;gap:10px;align-items:center">
             <span style="font-size:11px;color:var(--text-3)">Preview:</span>
-            <button id="cta-preview-btn" style="padding:8px 18px;border-radius:6px;border:none;font-size:13px;font-weight:700;cursor:default;background:#c0392b;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2);transition:all .2s">Botón CTA</button>
+            <button id="cta-preview-btn" style="padding:8px 18px;border-radius:6px;border:none;font-size:13px;font-weight:700;cursor:default;background:#1a4fa0;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2);transition:all .2s">Botón CTA</button>
           </div>
         </div>
         <div class="card-body">
@@ -647,8 +647,8 @@ tr:hover td{background:#f8fafc}
           <div class="srow">
             <div><div class="sr-name">Color de Botones CTA</div><div class="sr-key">cta_color</div><div class="sr-desc">Todos los botones principales: "Get Cash Offer", "Submit", etc.</div></div>
             <div style="display:flex;align-items:center;gap:10px">
-              <input type="color" id="setting-cta_color" value="#c0392b" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="syncCtaPreview('cta_color',this.value);document.getElementById('setting-cta_color_hex').value=this.value">
-              <input type="text"  id="setting-cta_color_hex" placeholder="#c0392b" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_color').value=this.value;syncCtaPreview('cta_color',this.value)">
+              <input type="color" id="setting-cta_color" value="#1a4fa0" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="syncCtaPreview('cta_color',this.value);document.getElementById('setting-cta_color_hex').value=this.value">
+              <input type="text"  id="setting-cta_color_hex" placeholder="#1a4fa0" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_color').value=this.value;syncCtaPreview('cta_color',this.value)">
             </div>
             <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_color')">Guardar</button></div>
           </div>
@@ -656,7 +656,7 @@ tr:hover td{background:#f8fafc}
           <div class="srow">
             <div><div class="sr-name">Color Gradiente / Hover</div><div class="sr-key">cta_color_2</div><div class="sr-desc">Color secundario del gradiente y hover. Vacío = se calcula automático</div></div>
             <div style="display:flex;align-items:center;gap:10px">
-              <input type="color" id="setting-cta_color_2" value="#a93226" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-cta_color_2_hex').value=this.value">
+              <input type="color" id="setting-cta_color_2" value="#13387a" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-cta_color_2_hex').value=this.value">
               <input type="text"  id="setting-cta_color_2_hex" placeholder="#a93226" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-cta_color_2').value=this.value">
             </div>
             <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('cta_color_2')">Guardar</button></div>
@@ -683,7 +683,7 @@ tr:hover td{background:#f8fafc}
           <div class="srow">
             <div><div class="sr-name">Teléfono en Barra Superior</div><div class="sr-key">topbar_phone_bg</div><div class="sr-desc">Fondo del botón 📞 en el topbar</div></div>
             <div style="display:flex;align-items:center;gap:10px">
-              <input type="color" id="setting-topbar_phone_bg" value="#1c1c1c" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-topbar_phone_bg_hex').value=this.value">
+              <input type="color" id="setting-topbar_phone_bg" value="#1a4fa0" style="width:60px;height:38px;border:1px solid var(--border);border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('setting-topbar_phone_bg_hex').value=this.value">
               <input type="text"  id="setting-topbar_phone_bg_hex" placeholder="#1c1c1c" style="width:110px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:monospace;color:var(--text)" oninput="document.getElementById('setting-topbar_phone_bg').value=this.value">
             </div>
             <div><button class="btn btn-ghost btn-sm" onclick="syncCtaAndSave('topbar_phone_bg')">Guardar</button></div>
